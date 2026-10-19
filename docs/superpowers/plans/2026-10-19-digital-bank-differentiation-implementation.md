@@ -1,0 +1,11 @@
+# Implement the user-directed differentiation revision
+
+The user directly instructed this correction within the approved 16-slide artifact and publication scope. The revision design is committed as f62b0be and independently approved in the focused specification review. The installed writing-plans companion remains absent; this committed plan provides the implementation handoff.
+
+1. Replace the 16 scene definitions with the revised Elastic philosophy, Streams, RCA, Workflows and FSI proof story. Preserve the 1,080-second plan and existing player behavior. Root owns content, player metadata, export templates, integration and delivery.
+2. Author original SVGs with the shared 1100×360 primitives in two isolated modules: visuals-foundation.ts owns IDs30–37 (routes0–7); visuals-action.ts owns IDs38–45 (routes8–15). Four build phases explain changes continuously; settled/static/reduced states expose all content. Keep type labels20–24px with generous spacing.
+3. Evidence researcher owns src/evidence.ts only. Verify current Streams and Workflows maturity, self-managed requirements and exact customer claims. Use supported basic Stream management/processing; advanced/wired/AI features receive separate qualifications.
+4. Use explicit customer scene metadata for labels. Preserve route/history, presenter controls, native keyboard behavior and thumbnail focus. Remove unused former-story visual modules to prevent drift.
+5. Review foundation, Streams, Workflows and proof renderings; repair clarity/geometry before exporting. Update narrative assertions while retaining existing runtime test coverage. Regenerate notes/evidence/HTML/thumbnails/PDF from current source. No new live system or model connection.
+6. Verify all16 scenes at densities1/3/5, meaningful motion, direct navigation, offline startup/downloads, actual16-pagePDF render and public-source integrity. Apply the value check: can the audience explain why Elastic, what Streams changes, what Workflows changes, and how the proof applies?
+7. Publish to the same approved repository/Pages site after checks, retain the previous successful revision in Git, verify live assets/routes/download hashes, refresh the user-visible tab and provide current offline companions. Do not modify the original reference or other presentations.
