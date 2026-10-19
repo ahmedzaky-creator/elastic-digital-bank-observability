@@ -1,6 +1,6 @@
 # Reliable Digital Banking — presentation design
 
-Status: proposed for the user's written review before implementation. Prepared 19 October 2026 for the customer meeting on 20 October 2026, Asia/Riyadh.
+Status: independently reviewed; awaiting the user's written approval before implementation. Prepared 19 October 2026 for the customer meeting on 20 October 2026, Asia/Riyadh.
 
 ## Brief and decisions
 
