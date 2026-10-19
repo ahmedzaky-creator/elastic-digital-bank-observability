@@ -1,12 +1,12 @@
 import type { Source } from "./types";
 
-// Public references only. The authored examples never use customer production data.
+// Public references only. All operational examples are original and synthetic.
 export const S = {
   observability: {
     id: "observability",
     label: "Elastic Observability overview",
     url: "https://www.elastic.co/docs/solutions/observability",
-    note: "Public capability reference for logs, metrics, traces and user-experience evidence. Actual coverage depends on collection, configuration, instrumentation and permissions; it does not establish the fictional bank’s current capabilities.",
+    note: "Public capability reference for logs, metrics, traces, application performance and infrastructure monitoring. Actual coverage depends on collection, configuration, instrumentation and permissions; the presentation does not establish the bank’s current capabilities.",
   },
   streams: {
     id: "streams",
@@ -96,7 +96,7 @@ export const S = {
     id: "financial-services",
     label: "Elastic for financial services",
     url: "https://www.elastic.co/industries/financial-services",
-    note: "Public industry context for application performance, payment visibility, customer experience and operating-model choices. The presentation's banking use cases are proposed applications, not claims of the prospect's current implementation, quantified results or regulatory compliance.",
+    note: "Public industry context for application performance, payment operations, service reliability and operating-model choices. Banking use cases are proposed applications, not claims of the prospect’s current implementation, quantified results or regulatory compliance.",
   },
   serviceMap: {
     id: "service-map",
@@ -128,17 +128,23 @@ export const S = {
     url: "https://www.elastic.co/customers/oney-bank",
     note: "Elastic-published customer account: API incident detection changed from up to 20 minutes to one minute. This measures detection, not resolution or MTTR. The source does not establish an on-premises deployment. Reported outcome, not a prospect forecast.",
   },
-  wepay: {
-    id: "wepay",
-    label: "WePay customer story",
-    url: "https://www.elastic.co/customers/wepay/",
-    note: "Elastic-published customer account: 90% less time to identify customer impact during incidents, with consolidated logging/telemetry in a Google Cloud context. APM adoption was a future plan in this story; do not attribute the result to APM or redefine it as downtime, failures or MTTR.",
-  },
   enbd: {
     id: "emirates-nbd",
     label: "Emirates NBD customer story",
     url: "https://www.elastic.co/customers/emirates-nbd/",
-    note: "Elastic-published customer account: centralized logs stored on premises, plus APM, with locating customer-facing problems and issue resolution improving from days to minutes. The source does not establish Saudi hosting or regulatory approval; this is a reported outcome, not a universal benchmark.",
+    note: "Elastic-published customer account: centralized logs stored on premises, plus APM, with locating application problems and resolving operational issues improving from days to minutes. This does not establish Saudi hosting or regulatory approval; it is a reported example, not a universal benchmark.",
+  },
+  infrastructure: {
+    id: "infrastructure",
+    label: "Infrastructure and host monitoring",
+    url: "https://www.elastic.co/docs/solutions/observability/infra-and-hosts",
+    note: "Elastic connects host, container and infrastructure conditions to an operational investigation using collected metrics and logs. Collection, supported integrations, resource identity and permissions determine coverage. Resource pressure is evidence to examine, not proof of the cause.",
+  },
+  discover: {
+    id: "discover-customer",
+    label: "Discover customer story",
+    url: "https://www.elastic.co/customers/discover",
+    note: "Elastic-published customer account: historical-data retrieval moved from 24 hours or more to minutes, with a reported 50% reduction in storage requirements. The story uses Elastic Cloud Enterprise with AWS and S3, not an on-premises reference. It describes data streams, ILM and Watcher; it does not attribute results to today’s Streams or Workflows. No total-spend saving or prospect forecast is implied.",
   },
 } satisfies Record<string, Source>;
 

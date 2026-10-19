@@ -60,15 +60,15 @@ function observabilityCover(o: VisualOptions): string {
 }
 
 function connectedBank(o: VisualOptions): string {
-  const channels =
-    txt(118, 31, "Digital channels", 23, C.ink, 600, "middle") +
-    ["Mobile", "APIs", "Cards"]
+  const workloads =
+    txt(118, 31, "Backend workloads", 23, C.ink, 600, "middle") +
+    ["Payment APIs", "Messaging", "Batch jobs"]
       .map((label, n) => {
         const y = 90 + n * 88;
         return (
           circle(40, y, 16, C.lightBlue, C.blue) +
           txt(72, y + 7, label, 23, C.ink, 500) +
-          path(`M190 ${y}C280 ${y} 277 174 350 174`, C.blue)
+          path(`M245 ${y}C292 ${y} 292 174 350 174`, C.blue)
         );
       })
       .join("");
@@ -77,11 +77,11 @@ function connectedBank(o: VisualOptions): string {
     iso(388, 104, 74, 48, 25, C.white, C.lightBlue, C.blue) +
     iso(593, 122, 74, 48, 25, C.white, C.lightTeal, C.teal) +
     iso(498, 231, 74, 39, 24, C.white, C.bg, C.gray) +
-    txt(462, 65, "Payments", 23, C.ink, 600, "middle") +
-    txt(667, 83, "Identity", 23, C.ink, 600, "middle") +
-    txt(572, 321, "Legacy services", 23, C.ink, 600, "middle") +
-    particle("M190 90C280 90 277 174 350 174H465L665 161", C.blue, 5.4) +
-    particle("M190 266C280 266 277 174 350 174H465L575 252", C.teal, 6, -2);
+    txt(462, 65, "APIs", 23, C.ink, 600, "middle") +
+    txt(667, 83, "Payment processor", 23, C.ink, 600, "middle") +
+    txt(572, 321, "Core dependencies", 23, C.ink, 600, "middle") +
+    particle("M245 90C292 90 292 174 350 174H465L665 161", C.blue, 5.4) +
+    particle("M245 266C292 266 292 174 350 174H465L575 252", C.teal, 6, -2);
   const fragments =
     path(
       "M741 146L788 112M812 96L867 56M650 206L764 199M792 199H867M647 264L781 282M809 282H867",
@@ -113,7 +113,7 @@ function connectedBank(o: VisualOptions): string {
       "middle",
     );
   return (
-    build(0, channels, o) +
+    build(0, workloads, o) +
     build(1, services, o) +
     build(2, fragments, o) +
     build(3, gap, o)
@@ -241,8 +241,8 @@ function searchFoundation(o: VisualOptions): string {
     txt(
       550,
       43,
-      "Why are mobile payments taking longer?",
-      25,
+      "Why is the payment backlog growing?",
+      24,
       C.ink,
       600,
       "middle",
@@ -370,7 +370,7 @@ function streamsBank(o: VisualOptions): string {
     txt(45, 111, '{"svc":"payment"}', 20, C.blue, 500, "start", true) +
     rect(25, 178, 330, 98, C.white, C.pink, 10) +
     txt(45, 211, "Legacy log", 23, C.ink, 600) +
-    txt(45, 244, "PAY | MOB | WAIT", 20, C.pink, 500, "start", true) +
+    txt(45, 244, "PAY | WORKER | WAIT", 20, C.pink, 500, "start", true) +
     txt(190, 318, "Different formats", 22, C.gray, 500, "middle");
   const preview =
     path(
@@ -384,14 +384,14 @@ function streamsBank(o: VisualOptions): string {
     txt(656, 126, "Sample", 20, C.gray, 500) +
     line(470, 138, 789, 138, C.line) +
     txt(470, 169, "service", 22, C.ink, 500, "start", true) +
-    txt(470, 210, "channel", 22, C.ink, 500, "start", true) +
-    txt(470, 251, "outcome", 22, C.ink, 500, "start", true) +
+    txt(470, 210, "component", 22, C.ink, 500, "start", true) +
+    txt(470, 251, "event", 22, C.ink, 500, "start", true) +
     txt(630, 318, "Validate the mapping", 22, C.gray, 500, "middle") +
     particle("M355 97C410 97 396 159 450 159", C.blue, 4.8) +
     particle("M355 227C410 227 396 159 450 159", C.pink, 5.4, -2);
   const fields =
     txt(656, 169, "payment", 21, C.blue, 500, "start", true) +
-    txt(656, 210, "mobile", 21, C.blue, 500, "start", true) +
+    txt(656, 210, "worker", 21, C.blue, 500, "start", true) +
     txt(656, 251, "waiting", 21, C.blue, 500, "start", true) +
     check(781, 314);
   const search =
@@ -401,8 +401,8 @@ function streamsBank(o: VisualOptions): string {
     iso(897, 117, 75, 24, 24, C.white, C.lightTeal, C.teal) +
     iso(897, 95, 75, 24, 24, C.white, C.lightTeal, C.teal) +
     txt(977, 232, "Search by service", 20, C.ink, 500, "middle") +
-    txt(977, 263, "and channel", 20, C.ink, 500, "middle") +
-    txt(977, 318, "Outcome stays visible", 20, C.gray, 500, "middle") +
+    txt(977, 263, "and component", 20, C.ink, 500, "middle") +
+    txt(977, 318, "Event stays visible", 20, C.gray, 500, "middle") +
     particle("M821 158H875", C.teal, 3.5, -1) +
     line(27, 340, 1063, 340, C.line);
   return (
@@ -441,27 +441,23 @@ function complementarySignals(o: VisualOptions): string {
     line(83, 283, 286, 283, C.pink, 7) +
     txt(50, 314, "Where is the delay?", 22, C.gray) +
     particle("M350 268C407 268 409 207 446 207", C.pink, 5, -2);
-  const experience =
+  // Infrastructure is resource context from metrics and logs, not a fourth signal type.
+  const infrastructure =
     rect(752, 210, 320, 121, C.white, C.line, 11) +
-    txt(774, 245, "User experience", 24, C.ink, 600) +
-    [0, 1, 2, 3]
-      .map((n) =>
-        circle(
-          788 + n * 36,
-          270,
-          6,
-          n === 2 ? C.lightPink : C.lightBlue,
-          n === 2 ? C.pink : C.blue,
-        ),
-      )
-      .join("") +
-    txt(774, 314, "What did the user see?", 22, C.gray) +
+    txt(774, 245, "Infrastructure", 24, C.ink, 600) +
+    txt(774, 269, "CPU", 20, C.gray, 500) +
+    line(862, 262, 1048, 262, C.line, 7) +
+    line(862, 262, 925, 262, C.blue, 7) +
+    txt(774, 292, "Memory", 20, C.gray, 500) +
+    line(862, 285, 1048, 285, C.line, 7) +
+    line(862, 285, 961, 285, C.teal, 7) +
+    txt(774, 319, "What is constrained?", 22, C.gray) +
     particle("M750 268C694 268 689 207 654 207", C.blue, 4.7, -0.5);
   return (
     build(0, center + logs, o) +
     build(1, metrics, o) +
     build(2, traces, o) +
-    build(3, experience, o)
+    build(3, infrastructure, o)
   );
 }
 

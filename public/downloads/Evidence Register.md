@@ -6,7 +6,7 @@ Checked 19 October 2026. Original diagrams and synthetic incident data illustrat
 
 [Official source](https://www.elastic.co/docs/solutions/observability)
 
-Public capability reference for logs, metrics, traces and user-experience evidence. Actual coverage depends on collection, configuration, instrumentation and permissions; it does not establish the fictional bank’s current capabilities.
+Public capability reference for logs, metrics, traces, application performance and infrastructure monitoring. Actual coverage depends on collection, configuration, instrumentation and permissions; the presentation does not establish the bank’s current capabilities.
 
 ## Elastic Streams overview
 
@@ -96,7 +96,7 @@ APM and tracing help teams examine application performance, errors and dependenc
 
 [Official source](https://www.elastic.co/industries/financial-services)
 
-Public industry context for application performance, payment visibility, customer experience and operating-model choices. The presentation's banking use cases are proposed applications, not claims of the prospect's current implementation, quantified results or regulatory compliance.
+Public industry context for application performance, payment operations, service reliability and operating-model choices. Banking use cases are proposed applications, not claims of the prospect’s current implementation, quantified results or regulatory compliance.
 
 ## Elastic APM service maps
 
@@ -128,20 +128,26 @@ Validate features against the intended release, deployment and actual subscripti
 
 Elastic-published customer account: API incident detection changed from up to 20 minutes to one minute. This measures detection, not resolution or MTTR. The source does not establish an on-premises deployment. Reported outcome, not a prospect forecast.
 
-## WePay customer story
-
-[Official source](https://www.elastic.co/customers/wepay/)
-
-Elastic-published customer account: 90% less time to identify customer impact during incidents, with consolidated logging/telemetry in a Google Cloud context. APM adoption was a future plan in this story; do not attribute the result to APM or redefine it as downtime, failures or MTTR.
-
 ## Emirates NBD customer story
 
 [Official source](https://www.elastic.co/customers/emirates-nbd/)
 
-Elastic-published customer account: centralized logs stored on premises, plus APM, with locating customer-facing problems and issue resolution improving from days to minutes. The source does not establish Saudi hosting or regulatory approval; this is a reported outcome, not a universal benchmark.
+Elastic-published customer account: centralized logs stored on premises, plus APM, with locating application problems and resolving operational issues improving from days to minutes. This does not establish Saudi hosting or regulatory approval; it is a reported example, not a universal benchmark.
+
+## Infrastructure and host monitoring
+
+[Official source](https://www.elastic.co/docs/solutions/observability/infra-and-hosts)
+
+Elastic connects host, container and infrastructure conditions to an operational investigation using collected metrics and logs. Collection, supported integrations, resource identity and permissions determine coverage. Resource pressure is evidence to examine, not proof of the cause.
+
+## Discover customer story
+
+[Official source](https://www.elastic.co/customers/discover)
+
+Elastic-published customer account: historical-data retrieval moved from 24 hours or more to minutes, with a reported 50% reduction in storage requirements. The story uses Elastic Cloud Enterprise with AWS and S3, not an on-premises reference. It describes data streams, ILM and Watcher; it does not attribute results to today’s Streams or Workflows. No total-spend saving or prospect forecast is implied.
 
 ## Measurement boundaries
 
-Oney measures API-incident detection, from up to 20 minutes to 1 minute. WePay measures time to identify customer impact during incidents, 90% less; its published story uses Google Cloud and describes APM as future adoption. Emirates NBD describes on-premises logs and APM and reports days-to-minutes improvement for customer-facing issues. These are different measures and are not forecasts for the prospect. None of these historical results is attributed to Streams or Workflows.
+Oney measures API-incident detection, from up to 20 minutes to 1 minute. Discover measures historical-data retrieval, from 24 hours or more to minutes, in an ECE/AWS/S3 environment. It separately reports 50% lower storage requirements, not total spend. Emirates NBD describes on-premises logs and APM and reports days-to-minutes improvement in locating application problems. These are different measures and are not forecasts for the prospect. None of these historical results is attributed to Streams or Workflows.
 
-The fictional incident separates a pending request, correlated evidence, a candidate explanation, an owner-verified finding and recovery checks. An accepted request alone does not establish settled funds; older pending requests require separate status/reconciliation checks.
+The fictional incident connects growing backend work and service latency to related evidence, a candidate explanation, an owner-verified finding and approved response. Fresh service latency, errors and backlog trends check operational recovery. These indicators do not establish payment settlement, correct balances or reconciliation.

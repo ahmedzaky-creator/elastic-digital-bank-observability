@@ -8,11 +8,13 @@ import {
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-import type { Scene } from "../src/types";
+import type { Scene, Source } from "../src/types";
 
 const downloads = path.resolve("public/downloads");
 const offlineFile = path.join(downloads, "digital-bank-observability.html");
 const errors = new WeakMap<Page, string[]>();
+const excludedLiveContentTerms =
+  /\b(?:user[\s\p{Pd}]*experience|(?:end|real)[\s\p{Pd}]*user[\s\p{Pd}]*monitoring|RUM|WePay|digital[\s\p{Pd}]*experience|session[\s\p{Pd}]*replay|onboarding|friction|abandonment|funnels?)\b/iu;
 const app = (page: Page) => page.locator("#app");
 const scene = (page: Page) => page.locator("#stage-mount > .scene");
 const action = (page: Page, name: string) =>
@@ -56,6 +58,14 @@ async function speakerNotes(page: Page) {
   const notes = page.getByRole("complementary", { name: "Speaker notes" });
   await expect(notes).toBeVisible();
   return notes;
+}
+
+function expectBackendOnly(text: string, context: string) {
+  const matches = Array.from(
+    text.matchAll(new RegExp(excludedLiveContentTerms.source, "giu")),
+    (match) => match[0],
+  );
+  expect([...new Set(matches)], context).toEqual([]);
 }
 
 async function controlledMotion(page: Page, index = 0) {
@@ -898,10 +908,11 @@ test("historical customer examples retain distinct metrics without attributing t
   await open(page, "/?density=1#14", 14);
   await expect(qualification).toBeVisible();
   await expect(qualification).toContainText(
-    /Customer-reported examples, not forecasts/,
+    /Reported examples, not forecasts/i,
   );
-  await expect(qualification).toContainText(/WePay: Google Cloud/);
-  await expect(qualification).toContainText(/APM adoption was a future plan/);
+  for (const context of [/Discover/, /ECE/, /AWS/])
+    await expect(qualification).toContainText(context);
+  await expect(qualification).toContainText(/not.{0,20}on[\s-]premises/i);
   await expect(scene(page).locator(".qualification > b")).toHaveText(
     "CUSTOMER-REPORTED EXAMPLE",
   );
@@ -910,27 +921,31 @@ test("historical customer examples retain distinct metrics without attributing t
     /Oney Bank/,
     /API-incident detection/,
     /20/,
-    /WePay/,
-    /Identify customer impact/,
-    /90%/,
+    /Discover/,
+    /Historical data retrieval/,
+    /24\+/,
+    /hours/i,
+    /Minutes/,
   ])
     await expect(visual).toContainText(label);
-  expect(
-    await scene(page)
-      .locator(".sources a")
-      .evaluateAll((links) => links.map((link) => link.getAttribute("href"))),
-  ).toEqual([
-    "https://www.elastic.co/customers/oney-bank",
-    "https://www.elastic.co/customers/wepay/",
-  ]);
+  const sources = await scene(page)
+    .locator(".sources a")
+    .evaluateAll((links) => links.map((link) => link.getAttribute("href")));
+  expect(sources).toHaveLength(2);
+  expect(sources[0]).toBe("https://www.elastic.co/customers/oney-bank");
+  expect(sources[1]).toBe("https://www.elastic.co/customers/discover");
   notes = await speakerNotes(page);
   await expect(notes).toContainText(/detection, not resolution or MTTR/);
+  await expect(notes).toContainText(/historical[\s-]data retrieval/i);
+  await expect(notes).toContainText(/24 hours or more/);
+  await expect(notes).toContainText(/minutes/i);
+  await expect(notes).toContainText(/Elastic Cloud Enterprise|\bECE\b/);
+  await expect(notes).toContainText(/AWS/);
   await expect(notes).toContainText(
-    /impact identification, not downtime, incident count or MTTR/,
+    /not evidence that modern Streams or Workflows/,
   );
-  await expect(notes).toContainText(/must not be attributed to APM/);
   await expect(notes).toContainText(
-    /Neither story establishes that Streams or Workflows caused the result/,
+    /50% lower storage requirements, not total observability spend/,
   );
 });
 
@@ -968,19 +983,15 @@ test("Streams pages preserve GA availability, optional approved-model assistance
     /Synthetic log-processing illustration/,
   );
   await expect(qualification).toContainText(
-    /Parsing is configured and reviewed/,
+    /Field extraction is configured and reviewed/,
   );
-  await expect(qualification).toContainText(
-    /request status is not payment settlement/,
-  );
+  await expect(qualification).toContainText(/these are operational events/);
   notes = await speakerNotes(page);
   await expect(notes).toContainText(/not a real Kibana capture/);
-  await expect(notes).toContainText(/failed processing visible for review/);
+  await expect(notes).toContainText(/inspect failed processing/);
+  await expect(notes).toContainText(/without wired-stream partitioning/);
   await expect(notes).toContainText(
-    /does not rely on wired-stream partitioning/,
-  );
-  await expect(notes).toContainText(
-    /An observed request status does not prove final payment completion/,
+    /Waiting events and service health do not establish payment settlement or correct balances/,
   );
 });
 
@@ -1036,6 +1047,8 @@ test("Workflows pages retain GA Enterprise requirements, configured external act
   await expect(notes).toContainText(
     /No transaction handling, system change or notification is executed/,
   );
+  await expect(notes).toContainText(/fresh latency, errors/);
+  await expect(notes).toContainText(/pending work is draining/);
 });
 
 test("RCA and FSI use cases retain candidate-cause, observed-coverage and payment-state boundaries", async ({
@@ -1045,11 +1058,13 @@ test("RCA and FSI use cases retain candidate-cause, observed-coverage and paymen
   const qualification = scene(page).locator(".qualification > span").first();
   await expect(qualification).toBeVisible();
   await expect(qualification).toContainText(
-    /Correlation is a candidate, not a verified cause/,
+    /owner verifies the actual setting and alternatives/,
   );
   await expect(qualification).toContainText(
-    /external-provider internals remain unobserved/,
+    /uninstrumented provider internals remain unobserved/,
   );
+  await expect(scene(page).locator(".visual")).toContainText("Candidate");
+  await expect(scene(page).locator(".visual")).toContainText("Owner verified");
   await expect(scene(page).locator(".qualification > b")).toContainText(
     "ILLUSTRATIVE",
   );
@@ -1065,18 +1080,26 @@ test("RCA and FSI use cases retain candidate-cause, observed-coverage and paymen
 
   await open(page, "/?density=1#9", 9);
   await expect(qualification).toBeVisible();
-  await expect(qualification).toContainText(/not measured prospect outcomes/);
   await expect(qualification).toContainText(
-    /Payment acceptance and settlement are distinct/,
+    /Proposed backend use cases and indicators/,
+  );
+  await expect(qualification).toContainText(
+    /Processing health does not prove settlement, balances or reconciliation/,
   );
   await expect(scene(page).locator(".qualification > b")).toContainText(
     "ILLUSTRATIVE",
   );
   notes = await speakerNotes(page);
-  await expect(notes).toContainText(/event eligibility/);
-  await expect(notes).toContainText(/data minimization/);
+  for (const boundary of [
+    /eligible events/,
+    /thresholds/,
+    /processing deadlines/,
+    /appropriate source instrumentation/,
+  ])
+    await expect(notes).toContainText(boundary);
+  await expect(notes).toContainText(/does not establish financial correctness/);
   await expect(notes).toContainText(
-    /do not claim reduced fraud, revenue uplift or regulatory compliance/,
+    /do not promise reduced fraud, revenue uplift or compliance/,
   );
 });
 
@@ -1110,4 +1133,64 @@ test("operating-model choice keeps approved data flows, optional model paths and
     /No Saudi-hosting or compliance assurance is implied/,
   );
   await expect(notes).toContainText(/optional model connection/);
+});
+
+test("published content remains backend-only with messaging, batch processing, infrastructure and a coherent latency/backlog response", async ({
+  page,
+}) => {
+  test.setTimeout(90_000);
+  await open(page);
+  const payload = await page.evaluate(
+    () =>
+      (
+        window as unknown as Window & {
+          __BANK_PRESENTATION__: { scenes: Scene[]; evidence: Source[] };
+        }
+      ).__BANK_PRESENTATION__,
+  );
+  expect(payload.scenes).toHaveLength(16);
+  expect(payload.evidence.length).toBeGreaterThan(0);
+  expectBackendOnly(
+    JSON.stringify(payload),
+    "All scene copy, notes and evidence metadata",
+  );
+  const visuals = new Map<number, string>();
+  for (const index of Array.from({ length: 16 }, (_, index) => index)) {
+    await open(page, `/#${index}`, index);
+    const visual = scene(page).locator(".bank-visual");
+    expectBackendOnly(
+      await visual.evaluate((svg) => svg.outerHTML),
+      `Rendered SVG for scene ${index + 1}`,
+    );
+    visuals.set(
+      index,
+      await visual
+        .locator("text")
+        .evaluateAll((labels) =>
+          labels.map((label) => label.textContent).join(" "),
+        ),
+    );
+  }
+  const workloads = `${visuals.get(1)} ${visuals.get(9)}`;
+  expect(workloads).toMatch(/\bMessaging\b/i);
+  expect(workloads).toMatch(/\bBatch\s+processing\b/i);
+  expect(
+    visuals.get(7),
+    "Resource context must retain the Infrastructure tile",
+  ).toMatch(/\bInfrastructure\b/i);
+  for (const index of [8, 11]) {
+    const item = payload.scenes[index];
+    const story = `${item.title} ${item.emphasis} ${item.lead} ${item.detail} ${item.takeaway} ${item.notes.body} ${visuals.get(index)}`;
+    expect(
+      story,
+      `Scene ${index + 1} must follow the same backend latency/backlog investigation`,
+    ).toMatch(/\blatency\b/i);
+    expect(story).toMatch(/\bbacklog\b/i);
+  }
+  for (const filename of ["Presenter Notes.md", "Evidence Register.md"]) {
+    expectBackendOnly(
+      await readFile(path.join(downloads, filename), "utf8"),
+      `Generated ${filename}`,
+    );
+  }
 });

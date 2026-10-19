@@ -1,10 +1,10 @@
 # Elastic Observability for Digital Banking
 
-A **16-slide, approximately 18-minute** presentation explaining Elastic's Observability philosophy and differentiators, with banking applications and public customer references.
+A **16-slide, approximately 18-minute** presentation explaining Elastic's Observability philosophy and differentiators, with backend banking operations and public customer references.
 
 [Open the presentation](https://ahmedzaky-creator.github.io/elastic-digital-bank-observability/#0)
 
-The story follows the platform: search foundation → open collection → Streams → connected signals and RCA → Workflows → operating-model choice. Two Streams scenes show log preparation and a banking field-extraction example. Two Workflows scenes show data-aware orchestration and a governed incident runbook. Emirates NBD, Oney Bank and WePay provide precisely attributed customer evidence. This is an original static presentation, with no live model, banking system or workflow connection.
+One fictional backend incident—payment latency and a growing backlog—connects the platform story: search foundation → open collection → Streams → connected signals and RCA → Workflows → operating-model choice. Two Streams scenes show log preparation and a payment-worker field-extraction example. Two Workflows scenes show data-aware orchestration and a governed incident runbook. Emirates NBD, Oney Bank and Discover provide precisely attributed customer evidence. This is an original static presentation, with no live model, banking system or workflow connection.
 
 ## Meeting files
 
@@ -37,9 +37,9 @@ Click the timer to pause or resume it. Hide notes before sharing the browser win
 
 Evidence was reviewed on 19 October 2026. Streams management is documented GA from Stack 9.2, while wired ingestion, AI features and individual actions have separate maturity and entitlement requirements. AI assistance requires an approved model connection; manual management does not. Workflows is GA from Stack 9.4 with Enterprise entitlement for self-managed/Hosted deployments. Configured external actions, permissions and the bank's approval process remain explicit.
 
-Customer outcomes support the broader Observability approach; they are not attributed to Streams or Workflows. Oney measures API-incident detection; WePay measures time to identify customer impact in a Google Cloud environment, with APM described as future adoption; Emirates NBD provides the regional on-premises logs/APM example. These are different measures and are not prospect forecasts. See the scene notes and evidence register for exact scope.
+Customer outcomes support the broader Observability approach; they are not attributed to Streams or Workflows. Oney measures API-incident detection; Discover measures access to historical investigation data in an ECE/AWS/S3 environment; Emirates NBD provides the regional on-premises logs/APM example. These are different measures and are not prospect forecasts. See the scene notes and evidence register for exact scope.
 
-The compact RCA example separates a candidate explanation from owner verification, and request success from payment settlement. Retention and deployment choices need design; self-managed storage does not establish local AI inference or regulatory compliance.
+The RCA example checks a changed connection limit against infrastructure and dependency alternatives. Service recovery and queue drainage remain distinct from payment settlement and reconciliation. Retention and deployment choices need design; self-managed storage does not establish local AI inference or regulatory compliance.
 
 The supplied FSI attachment and private research are excluded. Published diagrams, narration and synthetic data are original. The public reference informs the philosophy and explanatory motion. Font and trademark notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 

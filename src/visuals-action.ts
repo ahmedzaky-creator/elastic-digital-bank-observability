@@ -59,14 +59,7 @@ function workflows(o: VisualOptions): string {
     rect(258, 72, 240, 145, C.white, C.blue) +
     iso(278, 103, 23, 25, 10, C.white, C.lightBlue, C.blue) +
     txt(337, 116, "Elastic query", 22, C.ink, 600) +
-    lines(
-      279,
-      162,
-      ["Service context", "Related evidence"],
-      20,
-      C.gray,
-      28,
-    ) +
+    lines(279, 162, ["Service context", "Related evidence"], 20, C.gray, 28) +
     path("M498 144 H535", C.blue, false, true) +
     arrow(511, 144, 535, 144);
   const condition =
@@ -138,13 +131,13 @@ function bankRunbook(o: VisualOptions): string {
     arrow(929, 197, 929, 218, C.gray, true) +
     rect(783, 230, 293, 85, C.lightBlue, C.blue, 5) +
     txt(806, 263, "Configured response", 23, C.ink, 600) +
-    txt(806, 294, "Permitted, scoped action", 20, C.gray);
+    txt(806, 294, "Restore approved setting", 20, C.gray);
   const verify =
     arrow(767, 272, 643, 272, C.teal) +
     rect(260, 230, 363, 85, C.white, C.teal, 5) +
     check(286, 259) +
     txt(311, 268, "Verify recovery", 23, C.ink, 600) +
-    txt(284, 299, "Check fresh telemetry separately", 20, C.gray) +
+    txt(284, 299, "Latency · errors · backlog", 20, C.gray) +
     txt(
       25,
       348,
@@ -236,16 +229,25 @@ function connectedRca(o: VisualOptions): string {
       29,
     );
   const verification =
-    arrow(883, 157, 932, 157, C.teal) +
+    arrow(883, 157, 912, 157, C.teal) +
     circle(996, 111, 32, C.lightTeal, C.lightTeal) +
     path("M980 111 l10 10 22-24", C.teal) +
-    txt(996, 185, "Engineer", 23, C.ink, 600, "middle") +
-    txt(996, 216, "verifies", 23, C.ink, 600, "middle") +
+    txt(996, 165, "Verified finding", 20, C.ink, 600, "middle") +
+    lines(
+      996,
+      197,
+      ["Limit reduced", "after change"],
+      20,
+      C.ink,
+      27,
+      "middle",
+    ) +
+    txt(996, 260, "Owner verified", 20, C.teal, 600, "middle") +
     line(22, 295, 1076, 295, C.line, 1.5) +
     txt(
       22,
       327,
-      "A candidate is tested against actual configuration and competing explanations.",
+      "Check configuration, infrastructure and dependencies before confirming the cause.",
       20,
       C.gray,
     ) +
@@ -262,57 +264,59 @@ function fsiUseCases(o: VisualOptions): string {
   const structure =
     line(365, 30, 365, 299, C.line, 1.5) +
     line(731, 30, 731, 299, C.line, 1.5) +
-    txt(23, 38, "Payment outcomes", 24, C.ink, 600) +
-    txt(390, 38, "Login + onboarding", 24, C.ink, 600) +
-    txt(758, 38, "Card + channel", 24, C.ink, 600) +
+    txt(23, 38, "Payment APIs", 24, C.ink, 600) +
+    txt(390, 38, "Messaging", 24, C.ink, 600) +
+    txt(758, 38, "Batch processing", 24, C.ink, 600) +
     pill(23, 319, 230, "PROPOSED INDICATORS", C.lightBlue, C.blue) +
     txt(276, 342, "Agree definitions and baselines with the bank.", 20, C.gray);
   const payments =
-    circle(63, 127, 23, C.lightBlue, C.blue) +
-    path("M51 127 h24 m-7-7 7 7-7 7", C.blue) +
-    path("M86 127 H148 V93 H278 M148 127 V172 H278", C.blue, false, true) +
-    circle(291, 93, 14, C.lightTeal, C.teal) +
-    path("M284 93 l5 5 9-11", C.teal) +
-    circle(291, 172, 14, C.lightPink, C.pink) +
-    path("M291 165 v8 M291 178 v1", C.pink) +
-    txt(177, 84, "Completed", 20, C.ink, 500, "middle") +
-    txt(177, 205, "Exception", 20, C.ink, 500, "middle") +
-    txt(23, 260, "Exception rate", 22, C.blue, 600) +
-    txt(23, 290, "Completion time", 20, C.gray) +
-    movingDot("M86 127 H148 V93 H278", C.blue, "5s");
-  const friction =
-    path("M412 179 H475 V140 H544 V101 H684", C.blue, false, true) +
-    circle(412, 179, 9, C.white, C.blue) +
-    circle(475, 140, 9, C.white, C.blue) +
-    circle(544, 101, 9, C.white, C.blue) +
-    circle(684, 101, 9, C.lightTeal, C.teal) +
-    txt(408, 218, "Login", 20, C.gray) +
-    txt(558, 145, "Onboard", 20, C.gray) +
-    path("M534 162 v44", C.pink, true) +
-    txt(549, 203, "Friction", 20, C.pink, 600) +
-    txt(390, 260, "Failure / abandonment", 22, C.blue, 600) +
-    txt(390, 290, "Step duration", 20, C.gray);
-  const reliability =
-    circle(911, 137, 29, C.lightBlue, C.blue) +
-    rect(891, 124, 40, 27, C.white, C.blue, 4) +
-    line(892, 132, 930, 132, C.blue) +
-    path(
-      "M882 137 H805 V86 M940 137 H1014 V86 M911 166 V213",
-      C.blue,
-      false,
-      true,
-    ) +
-    rect(785, 65, 40, 25, C.white, C.blue, 4) +
-    line(790, 96, 820, 96, C.blue) +
-    rect(1002, 57, 24, 40, C.white, C.blue, 6) +
-    rect(889, 205, 44, 23, C.white, C.blue, 4) +
-    txt(758, 260, "Availability", 22, C.blue, 600) +
-    txt(758, 290, "Error rate by channel", 20, C.gray);
+    rect(24, 92, 111, 73, C.lightBlue, C.blue, 6) +
+    txt(79, 136, "API", 24, C.blue, 600, "middle") +
+    path("M135 128 H211", C.blue, false, true) +
+    arrow(190, 128, 211, 128) +
+    iso(224, 109, 44, 47, 17, C.white, C.lightBlue, C.blue) +
+    circle(312, 91, 17, C.lightPink, C.pink) +
+    path("M312 81 v10 l7 5", C.pink) +
+    txt(79, 209, "Request", 20, C.gray, 400, "middle") +
+    txt(268, 209, "Service", 20, C.gray, 400, "middle") +
+    txt(23, 260, "Latency + errors", 22, C.blue, 600) +
+    txt(23, 290, "By service + dependency", 20, C.gray) +
+    movingDot("M135 128 H211", C.blue, "5s");
+  const messaging =
+    rect(392, 94, 148, 78, C.white, C.blue, 6) +
+    rect(407, 114, 28, 38, C.lightBlue, C.blue, 3) +
+    rect(452, 114, 28, 38, C.lightBlue, C.blue, 3) +
+    rect(497, 114, 28, 38, C.lightBlue, C.blue, 3) +
+    path("M540 133 H595", C.blue, false, true) +
+    arrow(574, 133, 595, 133) +
+    rect(605, 96, 98, 73, C.lightBlue, C.blue, 6) +
+    txt(654, 139, "Worker", 20, C.blue, 600, "middle") +
+    txt(466, 209, "Queue", 20, C.gray, 400, "middle") +
+    path("M679 178 V209 H621 V178", C.pink, true) +
+    arrow(621, 198, 621, 178, C.pink, true) +
+    txt(390, 260, "Backlog + retries", 22, C.blue, 600) +
+    txt(390, 290, "Oldest-message age", 20, C.gray);
+  const batch =
+    rect(768, 94, 78, 72, C.white, C.blue, 6) +
+    txt(807, 138, "Job", 22, C.ink, 600, "middle") +
+    path("M846 130 H878", C.blue, false, true) +
+    arrow(857, 130, 878, 130) +
+    rect(887, 94, 78, 72, C.white, C.blue, 6) +
+    txt(926, 138, "Job", 22, C.ink, 600, "middle") +
+    path("M965 130 H997", C.blue, false, true) +
+    arrow(976, 130, 997, 130) +
+    rect(1006, 94, 69, 72, C.lightTeal, C.teal, 6) +
+    check(1040, 130) +
+    line(768, 205, 1075, 205, C.line, 2) +
+    circle(1005, 205, 14, C.lightPink, C.pink) +
+    path("M1005 197 v8 l6 4", C.pink) +
+    txt(758, 260, "Duration + failures", 22, C.blue, 600) +
+    txt(758, 290, "Deadline risk", 20, C.gray);
   return (
     build(0, structure, o) +
     build(1, payments, o) +
-    build(2, friction, o) +
-    build(3, reliability, o)
+    build(2, messaging, o) +
+    build(3, batch, o)
   );
 }
 
@@ -371,8 +375,8 @@ function pairedProof(o: VisualOptions): string {
     line(548, 27, 548, 286, C.line, 1.5) +
     txt(27, 44, "Oney Bank", 27, C.ink, 600) +
     txt(27, 83, "API-incident detection", 23, C.blue, 600) +
-    txt(596, 44, "WePay", 27, C.ink, 600) +
-    txt(596, 83, "Identify customer impact", 23, C.blue, 600);
+    txt(596, 44, "Discover", 27, C.ink, 600) +
+    txt(596, 83, "Historical data retrieval", 23, C.blue, 600);
   const oney =
     txt(38, 110, "UP TO", 18, C.gray, 600) +
     txt(38, 188, "20", 67, C.ink, 600) +
@@ -383,11 +387,15 @@ function pairedProof(o: VisualOptions): string {
     txt(387, 190, "1", 69, C.blue, 600, "middle") +
     txt(387, 256, "minute", 23, C.ink, 500, "middle") +
     movingDot("M180 168 H289", C.blue);
-  const wepay =
-    txt(596, 183, "90%", 79, C.blue, 600) +
-    txt(805, 153, "less time", 24, C.ink, 600) +
-    lines(805, 188, ["to identify", "customer impact"], 20, C.gray, 29) +
-    pill(596, 243, 190, "Google Cloud scope", C.lightBlue, C.blue);
+  const discover =
+    txt(596, 188, "24+", 65, C.ink, 600) +
+    txt(598, 227, "hours", 23, C.gray) +
+    path("M730 168 H839", C.blue, false, true) +
+    arrow(817, 168, 839, 168) +
+    circle(957, 170, 73, C.lightBlue, C.lightBlue) +
+    txt(957, 183, "Minutes", 35, C.blue, 600, "middle") +
+    pill(596, 251, 230, "ECE · AWS / S3", C.lightBlue, C.blue) +
+    movingDot("M730 168 H839", C.blue);
   const attribution =
     line(27, 304, 1076, 304, C.line, 1.5) +
     txt(
@@ -407,7 +415,7 @@ function pairedProof(o: VisualOptions): string {
   return (
     build(0, labels, o) +
     build(1, oney, o) +
-    build(2, wepay, o) +
+    build(2, discover, o) +
     build(3, attribution, o)
   );
 }
@@ -464,7 +472,7 @@ function closingMechanism(o: VisualOptions): string {
     txt(
       550,
       334,
-      "Validate one service · agree the evidence · make an informed decision",
+      "Validate one payment-processing service · agree the evidence · choose the next step",
       21,
       C.blue,
       600,
