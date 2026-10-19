@@ -10,15 +10,15 @@ Title: **Reliable Digital Banking**. Subtitle: **How Elastic Observability conne
 
 The presentation should help the customer see which banking journeys are affected, understand how teams investigate with shared evidence, and choose one useful validation. Technical details support that conversation in notes and qualifications. The presentation does not assume the prospect has a particular incident, architecture, service target, financial loss or regulatory obligation.
 
-The recommended delivery is **24 scenes with a 23-minute speaking plan**, leaving discussion outside that timing. The speaker can skip optional depth without changing the core story. Preserve the existing presentations and publish the new original content separately.
+The recommended delivery is **16 scenes with an 18-minute speaking plan**, leaving discussion outside that timing. The speaker can skip optional depth without changing the core story. Preserve the existing presentations and publish the new original content separately.
 
 ## Approaches considered
 
-| Approach | Strength | Trade-off | Decision |
-|---|---|---|---|
-| Customer-journey story, an evidence-led RCA example, and public customer proof | Connects the operational problem to customer experience and shows why the product matters | Requires a clear separation between fictional demonstration and reported results | Recommended: 24 scenes |
-| Executive overview with a few banking use cases | Shortest path to business priorities | Gives little room to explain how investigation improves | Alternative: approximately 16 scenes |
-| A product tour close to the technical reference | More feature and architecture depth | Reintroduces metrics/storage implementation detail the user wants to reduce | Not selected |
+| Approach                                                                       | Strength                                                                                  | Trade-off                                                                        | Decision                      |
+| ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ----------------------------- |
+| Customer-journey story, an evidence-led RCA example, and public customer proof | Connects the operational problem to customer experience and shows why the product matters | Requires a clear separation between fictional demonstration and reported results | Recommended: 16 scenes        |
+| Executive overview with a few banking use cases                                | Shortest path to business priorities                                                      | Gives little room to explain how investigation improves                          | Alternative: shorter overview |
+| A product tour close to the technical reference                                | More feature and architecture depth                                                       | Reintroduces metrics/storage implementation detail the user wants to reduce      | Not selected                  |
 
 No separate visual-choice companion is needed for design review: the user already supplied a specific visual reference. Review the narrative in writing, then inspect actual browser scenes during implementation.
 
@@ -36,32 +36,24 @@ The business discussion covers successful journeys, time to establish customer i
 
 Each scene has one main point, one original visual composition, concise customer-facing copy, speaker notes, timing, sources and applicable feature qualifications. All incident data and plotted values are clearly synthetic.
 
-| # | Scene | Purpose and visual | Seconds |
-|---|---|---|---:|
-| 1 | Reliable digital banking | Minimal cover; a customer journey connects to its operating evidence | 30 |
-| 2 | The customer promise | Show the outcome the customer expects from account access and payments | 45 |
-| 3 | The cost of an unclear incident | Waiting and repeat contacts illustrate possible consequences, without invented loss figures | 45 |
-| 4 | The journeys that matter | Account opening, login, payments and cards; select the transfer journey | 60 |
-| 5 | A transfer is still pending | Introduce the fictional incident through a neutral mobile experience | 60 |
-| 6 | The affected customer journey | Compare channel and request states; establish impact rather than infer it from server health | 60 |
-| 7 | Evidence across teams | Separate views converge on a shared incident window and request identity | 45 |
-| 8 | Elastic Observability | Introduce Elasticsearch as the searchable foundation connecting approved operational evidence | 60 |
-| 9 | Events, trends and request paths | Explain logs, metrics and traces in plain language, with required collection and instrumentation | 60 |
-| 10 | The path of a transfer request | Follow the instrumented payment service; gray out unobserved external-provider internals | 75 |
-| 11 | Evidence behind the delay | Connect waiting time, application events and the change record; identify a candidate cause | 75 |
-| 12 | The service owner verifies the cause | Check configuration and alternatives; distinguish the verified fictional finding from a correlation | 75 |
-| 13 | Recovery the customer can confirm | Approved restoration, fresh-request checks and separate review of earlier pending requests | 60 |
-| 14 | Reliability targets for the journey | Explain service targets in customer terms; the bank chooses the actual definition and target | 60 |
-| 15 | Account-opening experience | Illustrate where a journey stalls; separate technical failure from a valid business rejection | 60 |
-| 16 | Peak demand and safer releases | Compare permitted service evidence before/after a change; avoid claims of automatic capacity fixes | 60 |
-| 17 | Control over the operating model | Make self-managed operation clear; show access, retention and approved data-flow responsibilities | 60 |
-| 18 | Optional AI assistance | Show an illustrative evidence summary with a human reviewer; visibly qualify the Observability integration as Preview and preserve the complete manual investigation | 45 |
-| 19 | Oney Bank: earlier detection | Public API-incident detection result; large, plainly labeled comparison | 60 |
-| 20 | WePay: clearer customer impact | Public 90% result with its exact metric and Google Cloud context | 60 |
-| 21 | Emirates NBD: shared investigation | Regional public example: on-premises logs and APM, with reported days-to-minutes improvement | 75 |
-| 22 | The outcomes worth measuring | A blank evaluation framework separates detection, impact analysis, investigation and restoration | 60 |
-| 23 | One useful validation | Agree one journey, permitted evidence, baseline or unknown, owners and the decision the test supports | 60 |
-| 24 | The next conversation | Return to the opening journey and ask which service is worth validating first | 30 |
+| #   | Scene                                      | Purpose and visual                                                                                         | Seconds |
+| --- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------- | ------: |
+| 1   | Reliable digital banking                   | Minimal cover connecting a customer journey to operating evidence                                          |      30 |
+| 2   | The customer promise                       | Connect account access and payment outcomes to customer confidence                                         |      45 |
+| 3   | The journeys that matter                   | Account opening, login, payments and cards; select transfers                                               |      45 |
+| 4   | A pending transfer: who is affected?       | Introduce the synthetic symptom and compare channels and request states                                    |      90 |
+| 5   | Shared evidence with Elastic Observability | Teams converge on a searchable investigation; introduce events, trends and request paths in plain language |      75 |
+| 6   | The path of a transfer request             | Follow the instrumented service; keep provider internals visibly unobserved                                |      90 |
+| 7   | Evidence behind the delay                  | Connect waits and change context as a candidate explanation                                                |      90 |
+| 8   | The service owner verifies the cause       | Check actual configuration and alternatives; confirm the fictional finding                                 |      90 |
+| 9   | Recovery the customer can confirm          | Approved restoration, fresh/downstream checks and separate pending reconciliation                          |      75 |
+| 10  | Reliability targets and safer releases     | Define customer-outcome measures and compare evidence around changes                                       |      75 |
+| 11  | Control over the operating model           | Self-managed deployment, access, retention and approved data flows                                         |      60 |
+| 12  | Oney Bank: earlier detection               | Public API-incident detection result with exact measure                                                    |      60 |
+| 13  | WePay: clearer customer impact             | Public 90% impact-identification result in Google Cloud context                                            |      60 |
+| 14  | Emirates NBD: shared investigation         | Regional on-premises logs/APM story with days-to-minutes result                                            |      75 |
+| 15  | One useful validation                      | Agree one journey, baseline or unknown, criteria, owners and decision                                      |      90 |
+| 16  | The next conversation                      | Return to the customer journey and choose the next practical step                                          |      30 |
 
 ## Public evidence and exact claim boundaries
 
@@ -82,7 +74,7 @@ Core capability evidence:
 - [AI chat experiences](https://www.elastic.co/docs/explore-analyze/ai-features/ai-chat-experiences) and [Agent/Assistant comparison](https://www.elastic.co/docs/explore-analyze/ai-features/ai-chat-experiences/ai-agent-or-ai-assistant/): use current Elastic AI Agent terminology and verify actual version/model/subscription requirements. Do not present the deprecated Observability AI Assistant as the new default, transfer its privacy features to Agent Builder, or imply autonomous diagnosis or response.
 - [Subscriptions](https://www.elastic.co/subscriptions): check the actual release and entitlement feature by feature. No blanket feature parity, free-platform, compliance or universal savings claim.
 
-**Scene 18 availability contract:** the visible footnote must say this is an illustrative AI summary, that the Observability-specific integration is Preview and version-dependent, and that an engineer verifies the evidence. Speaker notes distinguish core Agent Builder (GA from Stack 9.3) from the Observability integration and dedicated RCA skill, which current documentation labels Preview. Current pages distinguish the 9.3 opt-in experience from later defaults; release notes and branch labels differ, so validate the exact intended build rather than promise a specific default or every feature on an older release. Self-managed use requires the appropriate Enterprise entitlement, scoped privileges and an explicitly configured, approved model. Self-managed Elasticsearch does not establish local model processing. Approved local and external model paths need separate review. Agent Builder does not inherit AI Assistant anonymization. The non-AI incident story is complete, and the presenter can skip this scene. No model call or action occurs. Supporting sources: [Agent Builder for Observability](https://www.elastic.co/docs/solutions/observability/ai/agent-builder-observability), [built-in skills](https://www.elastic.co/docs/explore-analyze/ai-features/agent-builder/builtin-skills-reference), [model configuration](https://www.elastic.co/docs/explore-analyze/ai-features/agent-builder/models), and the [Enterprise API requirement](https://www.elastic.co/docs/api/doc/kibana/v9/group/endpoint-agent-builder).
+**Optional AI discussion belongs in speaker notes only.** The 16-slide core story is complete without generative AI; no hidden extra AI/appendix slide is included. If the customer asks, explain that an AI summary is illustrative, version-dependent and subject to engineer verification. Core Agent Builder is GA from Stack 9.3; the Observability integration and dedicated RCA skill are labeled Preview in current docs. Validate the exact intended build, Enterprise entitlement, scoped privileges and an explicitly approved configured model. Self-managed Elasticsearch does not establish local model processing. Agent Builder does not inherit AI Assistant anonymization. Supporting sources: [Agent Builder for Observability](https://www.elastic.co/docs/solutions/observability/ai/agent-builder-observability), [model configuration](https://www.elastic.co/docs/explore-analyze/ai-features/agent-builder/models), and [comparison](https://www.elastic.co/docs/explore-analyze/ai-features/ai-chat-experiences/ai-agent-or-ai-assistant/).
 
 ## Visual and motion design
 
@@ -94,9 +86,9 @@ Motion makes connections understandable: a request follows a path, evidence conv
 
 ## Player and implementation boundaries
 
-After approval, build an original static Vite/TypeScript presentation, reusing the established presentation-controller patterns where helpful. Keep player state, scene content, synthetic incident data, visual renderers and evidence separately maintainable. The controller owns routes, playback and presenter tools; content definitions own the 24-scene contract and notes. Avoid an AE coaching interface on the customer presentation.
+After approval, build an original static Vite/TypeScript presentation, reusing the established presentation-controller patterns where helpful. Keep player state, scene content, synthetic incident data, visual renderers and evidence separately maintainable. The controller owns routes, playback and presenter tools; content definitions own the 16-scene contract and notes. Avoid an AE coaching interface on the customer presentation.
 
-Provide `#0`–`#23` deep links, Previous/Next, browser Back/Forward, overview and filmstrip with complete thumbnails, fullscreen, notes, timer, replay/pause, laser/drawing and shortcut help. Retain five density levels with business-friendly density 3 as default; deeper qualifications primarily belong in notes. Keep native keyboard behavior inside editable controls and prevent accidental swipe navigation during pinch/scroll gestures. Annotation tools never execute a real action.
+Provide `#0`–`#15` deep links, Previous/Next, browser Back/Forward, overview and filmstrip with complete thumbnails, fullscreen, notes, timer, replay/pause, laser/drawing and shortcut help. Retain five density levels with business-friendly density 3 as default; deeper qualifications primarily belong in notes. Keep native keyboard behavior inside editable controls and prevent accidental swipe navigation during pinch/scroll gestures. Annotation tools never execute a real action.
 
 Density 1 retains the headline, complete main visual, sources and material qualifications; 2 adds the short lead; 3 adds a business takeaway; 4 adds one deeper explanation; 5 adds the full supporting qualification. Material availability, metric definitions and fictional-data labels never disappear at a lower density. Diagram completeness is independent of density.
 
@@ -106,7 +98,7 @@ Only the active scene's animation runs. Stop timers and handlers on scene exit; 
 
 Recommended separate public repository: **`ahmedzaky-creator/elastic-digital-bank-observability`**, with GitHub Pages. The public artifact contains only original, customer-neutral content and supported public references. The source FSI deck, notes and extracted assets remain local and excluded from the repository and output package. Approval of this design includes this publication scope.
 
-Deliver a hosted browser link, a standalone offline HTML with bundled fonts/graphics/scripts/notes, a **24-page PDF at density 3**, presenter notes with scene timings/transitions/questions/qualifications, and a public evidence register. Final user-facing files belong under `outputs/digital-bank-observability`. A PowerPoint export is not required for this browser-format request.
+Deliver a hosted browser link, a standalone offline HTML with bundled fonts/graphics/scripts/notes, a **16-page PDF at density 3**, presenter notes with scene timings/transitions/questions/qualifications, and a public evidence register. Final user-facing files belong under `outputs/digital-bank-observability`. A PowerPoint export is not required for this browser-format request.
 
 [Hive Mind](https://github.com/elastic/hive-mind) is recommended as an excluded local development reference if additional Elastic implementation patterns are needed; no installation or runtime dependency is required for this static presentation.
 
@@ -114,10 +106,10 @@ Deliver a hosted browser link, a standalone offline HTML with bundled fonts/grap
 
 1. Finish the independent written-spec review, obtain the user's review, and commit an implementation plan before building.
 2. Build and visually inspect four representative scenes first: cover, affected journey, cause verification and a customer-proof scene.
-3. Complete all 24 scenes and notes, preserving the business story and the evidence/causality/payment-state distinctions.
+3. Complete all 16 scenes and notes, preserving the business story and the evidence/causality/payment-state distinctions.
 4. Review every scene at densities 1, 3 and 5; inspect desktop/mobile layouts, reverse navigation, replay, reduced motion, thumbnails, notes, timer, fullscreen and annotations. Require readable text, complete graphics and no clipping, missing assets or browser errors.
-5. Open the offline copy with networking disabled. Check the PDF has exactly 24 complete, readable pages with the relevant sources. Inspect the actual rendered exports, not just their existence.
+5. Open the offline copy with networking disabled. Check the PDF has exactly 16 complete, readable pages with the relevant sources. Inspect the actual rendered exports, not just their existence.
 6. Audit intended public files/history for source-deck material, private paths, identifiers and unsupported claims. Build with locked dependencies; run appropriate browser checks in deployment automation.
 7. Verify the published site, direct links and downloadable files. Keep the source and previous successful deployment recoverable through Git history and documented rollback.
 
-The user approved this written design and publication scope on 19 October 2026. Implementation follows the committed plan.
+The user approved the written design and publication scope on 19 October 2026, then explicitly changed the total to 16 slides. This revision implements that instruction, combines introductory/evaluation material, moves optional AI detail into notes, and retains the complete incident and three customer stories. Implementation follows the amended plan.
