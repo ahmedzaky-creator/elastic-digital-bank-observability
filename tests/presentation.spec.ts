@@ -50,6 +50,14 @@ async function data(page: Page): Promise<Scene[]> {
   );
 }
 
+async function speakerNotes(page: Page) {
+  if ((await action(page, "notes").getAttribute("aria-pressed")) !== "true")
+    await action(page, "notes").click();
+  const notes = page.getByRole("complementary", { name: "Speaker notes" });
+  await expect(notes).toBeVisible();
+  return notes;
+}
+
 async function controlledMotion(page: Page, index = 0) {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.clock.install({ time: new Date("2026-10-19T09:00:00Z") });
@@ -339,7 +347,7 @@ test("overview contains 16 complete SVG thumbnails and selecting one changes the
   await open(page);
   await page.keyboard.press("g");
   const dialog = page.getByRole("dialog");
-  await expect(dialog).toContainText("16 scenes. One banking journey.");
+  await expect(dialog).toContainText(/16 scenes\./);
   await expect(dialog.locator(".thumb")).toHaveCount(16);
   await expect(dialog.locator(".bank-visual")).toHaveCount(16);
   await dialog.getByRole("button", { name: "Close dialog" }).focus();
@@ -408,10 +416,20 @@ test("N opens notes with timing, questions, transitions and evidence that follow
     "Qualifications",
     "Public evidence",
   ]);
-  await expect(notes).toContainText("operating model");
+  await expect(notes.getByRole("heading", { level: 2 })).toContainText(
+    "Workflows:",
+  );
   await page.keyboard.press("ArrowRight");
   await expect(notes).toContainText("SCENE 12");
-  await expect(notes).toContainText("Oney Bank");
+  await expect(notes.getByRole("heading", { level: 2 })).toContainText(
+    "Workflows:",
+  );
+  await page.keyboard.press("ArrowRight");
+  await expect(notes).toContainText("SCENE 13");
+  await expect(notes.getByRole("heading", { level: 2 })).toContainText(
+    /operating model/i,
+  );
+  await expect(notes).toContainText("Elasticsearch data tiers");
   await page.getByRole("button", { name: "Close speaker notes" }).click();
   await expect(notes).toBeHidden();
   await expect(action(page, "notes")).toHaveAttribute("aria-pressed", "false");
@@ -618,7 +636,7 @@ test("desktop and small mobile layouts stay within the viewport and expose reada
     { width: 320, height: 740 },
   ]) {
     await page.setViewportSize(viewport);
-    for (const index of [0, 3, 7, 10, 11, 15]) {
+    for (const index of Array.from({ length: 16 }, (_, index) => index)) {
       await open(page, `/#${index}`, index);
       expect(
         await page.evaluate(
@@ -722,13 +740,20 @@ test("standalone file works with networking disabled, bundled fonts and download
   context,
 }) => {
   test.setTimeout(90_000);
+  await open(page);
+  const hostedScenes = await data(page);
   const remoteRequests: string[] = [];
   page.on("request", (request) => {
     if (/^https?:/.test(request.url())) remoteRequests.push(request.url());
   });
   await context.setOffline(true);
   await open(page, pathToFileURL(offlineFile).href, 0);
+  await expect(page).toHaveTitle("Elastic Observability for Digital Banking");
   const scenes = await data(page);
+  expect(
+    scenes,
+    "The offline export must contain the current hosted narrative",
+  ).toEqual(hostedScenes);
   for (const [index, item] of scenes.entries()) {
     await page.evaluate((value) => {
       location.hash = String(value);
@@ -790,6 +815,7 @@ test("all four hosted download links return the actual non-placeholder delivery 
   page,
 }) => {
   await open(page);
+  const scenes = await data(page);
   await page.getByRole("button", { name: "Help and downloads" }).click();
   const files = [
     ["16-page PDF", "digital-bank-observability.pdf"],
@@ -813,127 +839,275 @@ test("all four hosted download links return the actual non-placeholder delivery 
       expect(bytes.length).toBeGreaterThan(100_000);
       expect(bytes.toString()).toContain('id="offline-data"');
       expect(bytes.toString()).toContain("data:font/woff2;base64,");
+      expect(bytes.toString()).toContain(
+        "<title>Elastic Observability for Digital Banking</title>",
+      );
     } else {
       expect(bytes.length).toBeGreaterThan(3000);
       expect(bytes.toString()).not.toMatch(/^\s*<!doctype html/i);
       expect(bytes.toString()).not.toMatch(/placeholder|coming soon/i);
+      if (filename === "Presenter Notes.md") {
+        expect(bytes.toString()).toMatch(
+          /^# Elastic Observability for Digital Banking — presenter notes\n/,
+        );
+        for (const [index, item] of scenes.entries())
+          expect(bytes.toString()).toContain(
+            `## ${String(index + 1).padStart(2, "0")} — ${item.title} ${item.emphasis}`,
+          );
+      } else {
+        expect(bytes.toString()).toMatch(
+          /^# Elastic Observability for Digital Banking — public evidence register\n/,
+        );
+        expect(bytes.toString()).toContain(
+          "None of these historical results is attributed to Streams or Workflows",
+        );
+      }
     }
   }
 });
 
-test("customer examples retain their own metrics, attribution and deployment context at density 1", async ({
+test("historical customer examples retain distinct metrics without attributing their results to Streams or Workflows", async ({
   page,
 }) => {
-  await open(page, "/?density=1#11", 11);
-  await expect(scene(page).locator(".qualification")).toContainText(
-    "API-incident detection, not resolution or MTTR",
-  );
-  await expect(scene(page).locator(".qualification")).toContainText(
-    "not a forecast",
+  await open(page, "/?density=1#13", 13);
+  await expect(scene(page).locator("h1")).toContainText("Emirates NBD");
+  const qualification = scene(page).locator(".qualification > span").first();
+  await expect(qualification).toBeVisible();
+  await expect(qualification).toContainText(/On-premises logs \+ APM/);
+  await expect(qualification).toContainText(
+    /not a Saudi-hosting or regulatory-approval claim/,
   );
   await expect(scene(page).locator(".qualification > b")).toHaveText(
     "CUSTOMER-REPORTED EXAMPLE",
   );
-  await expect(scene(page).locator(".visual")).toContainText("20");
-  await expect(scene(page).locator(".visual")).toContainText("1");
+  await expect(scene(page).locator(".visual")).toContainText(
+    /time to locate problems/i,
+  );
+  await expect(scene(page).locator(".visual")).toContainText("Days");
+  await expect(scene(page).locator(".visual")).toContainText("Minutes");
   await expect(scene(page).locator(".sources a")).toHaveAttribute(
     "href",
+    "https://www.elastic.co/customers/emirates-nbd/",
+  );
+  let notes = await speakerNotes(page);
+  await expect(notes).toContainText(
+    /not proof that Streams or Workflows produced the reported result/,
+  );
+  await expect(notes).toContainText(/not a measured guarantee or a forecast/);
+
+  await open(page, "/?density=1#14", 14);
+  await expect(qualification).toBeVisible();
+  await expect(qualification).toContainText(
+    /Customer-reported examples, not forecasts/,
+  );
+  await expect(qualification).toContainText(/WePay: Google Cloud/);
+  await expect(qualification).toContainText(/APM adoption was a future plan/);
+  await expect(scene(page).locator(".qualification > b")).toHaveText(
+    "CUSTOMER-REPORTED EXAMPLE",
+  );
+  const visual = scene(page).locator(".visual");
+  for (const label of [
+    /Oney Bank/,
+    /API-incident detection/,
+    /20/,
+    /WePay/,
+    /Identify customer impact/,
+    /90%/,
+  ])
+    await expect(visual).toContainText(label);
+  expect(
+    await scene(page)
+      .locator(".sources a")
+      .evaluateAll((links) => links.map((link) => link.getAttribute("href"))),
+  ).toEqual([
     "https://www.elastic.co/customers/oney-bank",
+    "https://www.elastic.co/customers/wepay/",
+  ]);
+  notes = await speakerNotes(page);
+  await expect(notes).toContainText(/detection, not resolution or MTTR/);
+  await expect(notes).toContainText(
+    /impact identification, not downtime, incident count or MTTR/,
   );
-  await open(page, "/?density=1#12", 12);
-  await expect(scene(page).locator(".qualification")).toContainText(
-    "impact-identification result, not MTTR or downtime",
-  );
-  await expect(scene(page).locator(".qualification")).toContainText(
-    "Google Cloud context; APM was a future plan",
-  );
-  await expect(scene(page).locator(".visual")).toContainText("90%");
-  await expect(scene(page).locator(".qualification > b")).toHaveText(
-    "CUSTOMER-REPORTED EXAMPLE",
-  );
-  await open(page, "/?density=1#13", 13);
-  await expect(scene(page).locator(".qualification")).toContainText(
-    "days to minutes to locate problems",
-  );
-  await expect(scene(page).locator(".qualification")).toContainText(
-    "On-premises logs + APM",
-  );
-  await expect(scene(page).locator(".qualification")).toContainText(
-    "no Saudi-hosting or approval claim",
-  );
-  await expect(scene(page).locator(".qualification > b")).toHaveText(
-    "CUSTOMER-REPORTED EXAMPLE",
+  await expect(notes).toContainText(/must not be attributed to APM/);
+  await expect(notes).toContainText(
+    /Neither story establishes that Streams or Workflows caused the result/,
   );
 });
 
-test("payment state, causality and human recovery qualifications remain visible through the incident", async ({
+test("Streams pages preserve GA availability, optional approved-model assistance and reviewed payment evidence", async ({
   page,
 }) => {
-  for (const [index, qualification] of [
-    [
-      3,
-      "Pending does not mean failed; accepted does not prove downstream completion or settlement",
-    ],
-    [5, "provider internals are unobserved"],
-    [6, "Correlation and a slow trace alone do not establish causality"],
-    [7, "A chart or correlation alone does not prove a cause"],
-    [
-      8,
-      "API success alone does not establish settlement or correct balances; reconcile earlier pending transfers",
-    ],
-    [9, "API success does not establish settled payments"],
-  ] as const) {
-    await open(page, `/?density=1#${index}`, index);
-    await expect(
-      scene(page).locator(".qualification > span").first(),
-    ).toBeVisible();
-    await expect(
-      scene(page).locator(".qualification > span").first(),
-    ).toContainText(qualification);
-    await expect(scene(page).locator(".qualification > b")).toContainText(
-      "ILLUSTRATIVE",
-    );
-  }
-  await open(page, "/?density=1#7", 7);
-  await expect(scene(page).locator(".visual")).toContainText(
-    "Service owner checks",
+  await open(page, "/?density=1#5", 5);
+  await expect(scene(page).locator("h1")).toContainText("Streams:");
+  const qualification = scene(page).locator(".qualification > span").first();
+  await expect(qualification).toBeVisible();
+  await expect(qualification).toContainText(/Stack 9\.2\+/);
+  await expect(qualification).toContainText(/approved model/);
+  await expect(qualification).toContainText(/entitlement/);
+  await expect(qualification).toContainText(/features vary by version/);
+  await expect(scene(page).locator(".sources a").first()).toHaveAttribute(
+    "href",
+    "https://www.elastic.co/docs/solutions/observability/streams/streams",
   );
-  await expect(scene(page).locator(".visual")).toContainText(
-    "Verified finding",
+  let notes = await speakerNotes(page);
+  await expect(notes).toContainText(
+    /Streams management is documented GA from Stack 9\.2/,
   );
-  await expect(scene(page).locator(".visual")).toContainText(
-    "Restoration follows normal change approval",
+  await expect(notes).toContainText(/AI pipeline suggestions are optional/);
+  await expect(notes).toContainText(/configured generative AI connector/);
+  await expect(notes).toContainText(/manual processors are also supported/);
+  await expect(notes).toContainText(/sample logs to the configured model/);
+  await expect(notes).toContainText(
+    /Wired partitioning and Streams-specific workflow actions have separate Preview status/,
   );
-  await open(page, "/?density=1#8", 8);
-  await expect(scene(page).locator(".visual")).toContainText(/pending/i);
-  await expect(scene(page).locator(".visual")).toContainText(/downstream/i);
+
+  await open(page, "/?density=1#6", 6);
+  await expect(scene(page).locator("h1")).toContainText("Streams:");
+  await expect(qualification).toBeVisible();
+  await expect(qualification).toContainText(
+    /Synthetic log-processing illustration/,
+  );
+  await expect(qualification).toContainText(
+    /Parsing is configured and reviewed/,
+  );
+  await expect(qualification).toContainText(
+    /request status is not payment settlement/,
+  );
+  notes = await speakerNotes(page);
+  await expect(notes).toContainText(/not a real Kibana capture/);
+  await expect(notes).toContainText(/failed processing visible for review/);
+  await expect(notes).toContainText(
+    /does not rely on wired-stream partitioning/,
+  );
+  await expect(notes).toContainText(
+    /An observed request status does not prove final payment completion/,
+  );
 });
 
-test("self-managed operation keeps compliance and external-dependency qualifications in visible copy and notes", async ({
+test("Workflows pages retain GA Enterprise requirements, configured external actions and explicit bank approval", async ({
   page,
 }) => {
   await open(page, "/?density=1#10", 10);
-  await expect(
-    scene(page).locator(".qualification > span").first(),
-  ).toBeVisible();
-  await expect(
-    scene(page).locator(".qualification > span").first(),
-  ).toContainText("not a compliance assurance");
-  await expect(
-    scene(page).locator(".qualification > span").first(),
-  ).toContainText("Package, upgrade and support flows need review");
-  await page.keyboard.press("n");
-  const notes = page.getByRole("complementary", { name: "Speaker notes" });
+  await expect(scene(page).locator("h1")).toContainText("Workflows:");
+  const qualification = scene(page).locator(".qualification > span").first();
+  await expect(qualification).toBeVisible();
+  for (const term of [
+    /Stack 9\.4\+/,
+    /GA/,
+    /Enterprise/,
+    /external integrations must be configured/,
+  ])
+    await expect(qualification).toContainText(term);
+  let notes = await speakerNotes(page);
+  await expect(notes).toContainText(/Core Workflows is GA from Stack 9\.4/);
   await expect(notes).toContainText(
-    "Review the complete data flow and external dependencies",
-  );
-  await expect(notes).toContainText(
-    "No Saudi hosting, regulator approval, blanket feature parity or automatic compliance",
+    /Enterprise entitlement on self-managed and Elastic Cloud Hosted/,
   );
   await expect(notes).toContainText(
-    "self-managed deployment is not a blanket assurance of regulatory compliance or local hosting for every dependency",
+    /credentials, network path and authorization/,
   );
-  expect((await data(page)).some((item) => item.id === "optional-ai")).toBe(
-    false,
+  await expect(notes).toContainText(
+    /AI authoring have separate maturity and connection requirements/,
   );
+  await expect(notes).toContainText(
+    /does not use Preview Streams-specific workflow steps/,
+  );
+
+  await open(page, "/?density=1#11", 11);
+  await expect(scene(page).locator("h1")).toContainText("Workflows:");
+  await expect(qualification).toBeVisible();
+  await expect(qualification).toContainText(/Illustrative authored runbook/);
+  await expect(qualification).toContainText(
+    /approval use configured integrations or the bank's existing process/,
+  );
+  notes = await speakerNotes(page);
+  await expect(notes).toContainText(
+    /not a native approval screen or a prebuilt banking workflow/,
+  );
+  await expect(notes).toContainText(
+    /customer-impacting response requires the bank's existing approval process or an explicitly configured approval integration/,
+  );
+  await expect(notes).toContainText(
+    /appropriate credentials and a separate authorized action/,
+  );
+  await expect(notes).toContainText(
+    /earlier pending transfers need separate reconciliation/,
+  );
+  await expect(notes).toContainText(
+    /No transaction handling, system change or notification is executed/,
+  );
+});
+
+test("RCA and FSI use cases retain candidate-cause, observed-coverage and payment-state boundaries", async ({
+  page,
+}) => {
+  await open(page, "/?density=1#8", 8);
+  const qualification = scene(page).locator(".qualification > span").first();
+  await expect(qualification).toBeVisible();
+  await expect(qualification).toContainText(
+    /Correlation is a candidate, not a verified cause/,
+  );
+  await expect(qualification).toContainText(
+    /external-provider internals remain unobserved/,
+  );
+  await expect(scene(page).locator(".qualification > b")).toContainText(
+    "ILLUSTRATIVE",
+  );
+  let notes = await speakerNotes(page);
+  await expect(notes).toContainText(/actual setting/);
+  await expect(notes).toContainText(/alternative explanations/);
+  await expect(notes).toContainText(
+    /not a real investigation or an autonomous diagnosis/,
+  );
+  await expect(notes).toContainText(
+    /API success response alone does not establish settled funds or correct balances/,
+  );
+
+  await open(page, "/?density=1#9", 9);
+  await expect(qualification).toBeVisible();
+  await expect(qualification).toContainText(/not measured prospect outcomes/);
+  await expect(qualification).toContainText(
+    /Payment acceptance and settlement are distinct/,
+  );
+  await expect(scene(page).locator(".qualification > b")).toContainText(
+    "ILLUSTRATIVE",
+  );
+  notes = await speakerNotes(page);
+  await expect(notes).toContainText(/event eligibility/);
+  await expect(notes).toContainText(/data minimization/);
+  await expect(notes).toContainText(
+    /do not claim reduced fraud, revenue uplift or regulatory compliance/,
+  );
+});
+
+test("operating-model choice keeps approved data flows, optional model paths and local-inference limits explicit", async ({
+  page,
+}) => {
+  await open(page, "/?density=1#12", 12);
+  const qualification = scene(page).locator(".qualification > span").first();
+  await expect(qualification).toBeVisible();
+  await expect(qualification).toContainText(
+    /Self-managed deployment is supported/,
+  );
+  await expect(qualification).toContainText(
+    /licenses and approved data flows need design and validation/,
+  );
+  const notes = await speakerNotes(page);
+  await expect(notes).toContainText(/snapshot repository and subscription/);
+  await expect(notes).toContainText(
+    /not a promise to store everything indefinitely or achieve universal savings/,
+  );
+  await expect(notes).toContainText(
+    /package, upgrade and support dependencies/,
+  );
+  await expect(notes).toContainText(
+    /AI-assisted features need an explicitly approved model path/,
+  );
+  await expect(notes).toContainText(
+    /on-premises storage does not establish local inference/,
+  );
+  await expect(notes).toContainText(
+    /No Saudi-hosting or compliance assurance is implied/,
+  );
+  await expect(notes).toContainText(/optional model connection/);
 });

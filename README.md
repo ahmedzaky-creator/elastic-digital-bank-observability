@@ -1,10 +1,10 @@
-# Reliable Digital Banking
+# Elastic Observability for Digital Banking
 
-A customer-neutral, animated presentation about connecting customer experience with Elastic Observability and evidence-led root cause investigation. **16 slides; approximately 18 minutes of speaking time, plus discussion.**
+A **16-slide, approximately 18-minute** presentation explaining Elastic's Observability philosophy and differentiators, with banking applications and public customer references.
 
 [Open the presentation](https://ahmedzaky-creator.github.io/elastic-digital-bank-observability/#0)
 
-The story follows a fictional pending transfer: establish customer impact, connect approved evidence, verify the cause with the service owner, approve restoration, and check recovery. Three attributed customer stories explain earlier detection, clearer impact and shared investigation. This static presentation does not connect to banking systems or execute actions.
+The story follows the platform: search foundation → open collection → Streams → connected signals and RCA → Workflows → operating-model choice. Two Streams scenes show log preparation and a banking field-extraction example. Two Workflows scenes show data-aware orchestration and a governed incident runbook. Emirates NBD, Oney Bank and WePay provide precisely attributed customer evidence. This is an original static presentation, with no live model, banking system or workflow connection.
 
 ## Meeting files
 
@@ -13,11 +13,11 @@ The story follows a fictional pending transfer: establish customer impact, conne
 - [Presenter notes](public/downloads/Presenter%20Notes.md)
 - [Public evidence register](public/downloads/Evidence%20Register.md)
 
-Save all four files together. Open the HTML in a current browser; its fonts, graphics, scripts, notes and evidence text are bundled and work offline. The PDF is a separate companion file. Source links need a network connection. The PDF shows all 16 scenes at detail level 3 with complete diagrams and citations.
+Save the four files together. The HTML bundles fonts, graphics, scripts, notes and evidence text for offline playback. Keep the PDF beside it for the companion PDF link. Public source links require a network connection. The PDF shows all 16 complete scenes at detail level 3.
 
 ## Presenting
 
-Right/Left Arrow, Space and Page Down/Up change slides immediately. Animations play continuously while a slide is open. Pause holds the visual; Replay restarts it. Reduced-motion preferences show complete diagrams immediately. Direct links run from `#0` through `#15`, and browser Back/Forward are supported.
+Right/Left Arrow, Space and Page keys change slides immediately. Animations continue while the slide is open. Pause holds the current view; Replay restarts it. Reduced-motion preferences show the complete visual immediately. Routes are `#0` through `#15`; browser Back/Forward are supported.
 
 | Key        | Control                      |
 | ---------- | ---------------------------- |
@@ -31,15 +31,17 @@ Right/Left Arrow, Space and Page Down/Up change slides immediately. Animations p
 | ?          | Help and downloads           |
 | Home / End | First / last slide           |
 
-Click the timer to pause or resume it. Hide notes before sharing the browser window. Touch users can swipe between slides; on small screens, “Read scene text” offers a larger text view.
+Click the timer to pause or resume it. Hide notes before sharing the browser window. Touch users can swipe; smaller screens offer “Read scene text.”
 
 ## Evidence and boundaries
 
-Public sources were reviewed on 19 October 2026. Oney Bank’s result measures API-incident detection; WePay’s measures time to identify customer impact in its Google Cloud environment; Emirates NBD provides an on-premises logs/APM example. These are different measures and are not forecasts for another bank. See the evidence register and scene notes for exact attribution.
+Evidence was reviewed on 19 October 2026. Streams management is documented GA from Stack 9.2, while wired ingestion, AI features and individual actions have separate maturity and entitlement requirements. AI assistance requires an approved model connection; manual management does not. Workflows is GA from Stack 9.4 with Enterprise entitlement for self-managed/Hosted deployments. Configured external actions, permissions and the bank's approval process remain explicit.
 
-Pending requests, accepted requests and settled payments are distinct. Correlated signals do not establish cause. The fictional service owner verifies the configuration and alternatives before approving a change. Fresh-request recovery checks do not reconcile earlier pending transfers. Product capabilities depend on the intended version, subscription, instrumentation, permissions and operating model. AI is an optional notes discussion, outside the 16-slide story.
+Customer outcomes support the broader Observability approach; they are not attributed to Streams or Workflows. Oney measures API-incident detection; WePay measures time to identify customer impact in a Google Cloud environment, with APM described as future adoption; Emirates NBD provides the regional on-premises logs/APM example. These are different measures and are not prospect forecasts. See the scene notes and evidence register for exact scope.
 
-The attached authoring deck and private research are excluded. All published diagrams and incident data were created for this presentation. Font and trademark notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+The compact RCA example separates a candidate explanation from owner verification, and request success from payment settlement. Retention and deployment choices need design; self-managed storage does not establish local AI inference or regulatory compliance.
+
+The supplied FSI attachment and private research are excluded. Published diagrams, narration and synthetic data are original. The public reference informs the philosophy and explanatory motion. Font and trademark notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Develop and verify
 
@@ -53,20 +55,16 @@ npx playwright install chromium
 npm test
 ```
 
-Scene content, notes and source mappings are in `src/scenes.ts` and `src/evidence.ts`. The player is `src/main.ts`; original SVG diagrams are split between the business and investigation visual modules. Scene indices are independent of stable visual identifiers.
-
-To regenerate offline files, notes, PDF and complete thumbnails:
+Content, notes and citations are in `src/scenes.ts` and `src/evidence.ts`. The player is `src/main.ts`. `src/visuals-foundation.ts` owns the foundation/Streams diagrams; `src/visuals-action.ts` owns RCA/Workflows/operations/proof. Stable visual identifiers are separate from route indices.
 
 ```bash
 npm run export
 ```
 
-On macOS the export/visual-review scripts use installed Google Chrome. Elsewhere set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` to an installed Chromium executable. Export builds current source before rendering and rebuilds to include generated downloads. Final companions are written to `public/downloads/` and `artifacts/` (the latter is ignored).
+Export builds current source, creates offline HTML, 16 thumbnails, 16-page PDF, notes and evidence, then rebuilds to include the downloads. Generated companions are in `public/downloads/`; a working copy is in ignored `artifacts/`.
 
-For the visual geometry audit, run a production preview on port 4188, then `npm run qa`. It renders every slide at detail levels 1, 3 and 5. Browser tests cover navigation, continuous motion, accessibility of the overview, presenter controls, mobile interaction, print and disconnected offline operation. Actual PDF page count and rendered pages also require a final visual check.
+On macOS, export and visual-review scripts use installed Google Chrome. Elsewhere set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` to an installed Chromium binary. Run a production preview on port 4188 and `npm run qa` for all 16 scenes at detail levels 1, 3 and 5. Final verification also includes actual PDF rendering and a disconnected offline test.
 
 ## Publish and recover
 
-GitHub Actions performs a locked install, production build and browser tests before deploying `dist/` to Pages. Generated companions are versioned alongside the source. The deployment artifact is retained for 30 days.
-
-For rollback, revert the offending commit on `main` and let the same verified workflow redeploy. Previous source and companions remain recoverable from Git history. This project is separate from the other presentations.
+GitHub Actions performs a locked install, production build and browser tests before deploying `dist/` to Pages. Generated companions are versioned with source; deployment artifacts remain available for 30 days. Revert the offending commit on `main` to redeploy a prior revision through the same workflow. Other presentations are independent of this repository.

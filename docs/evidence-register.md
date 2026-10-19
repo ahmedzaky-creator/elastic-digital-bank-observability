@@ -1,4 +1,4 @@
-# Reliable Digital Banking — public evidence register
+# Elastic Observability for Digital Banking — public evidence register
 
 Checked 19 October 2026. Original diagrams and synthetic incident data illustrate the discussion; they are not production captures or measured prospect results. Customer examples are vendor-published reports with their original scope. Product availability depends on the actual release, entitlement, permissions, instrumentation and operating model.
 
@@ -7,6 +7,96 @@ Checked 19 October 2026. Original diagrams and synthetic incident data illustrat
 [Official source](https://www.elastic.co/docs/solutions/observability)
 
 Public capability reference for logs, metrics, traces and user-experience evidence. Actual coverage depends on collection, configuration, instrumentation and permissions; it does not establish the fictional bank’s current capabilities.
+
+## Elastic Streams overview
+
+[Official source](https://www.elastic.co/docs/solutions/observability/streams/streams)
+
+Streams management is documented GA from Stack 9.2. Wired ingestion and individual AI capabilities have separate maturity and entitlement requirements. An approved model connection is needed for AI assistance, not basic manual management. The illustration uses synthetic data and promises no measured savings.
+
+## Process documents with Streams
+
+[Official source](https://www.elastic.co/docs/solutions/observability/streams/parse-and-process)
+
+Users review suggested processors and preview field extraction before saving. AI suggestions send sample logs to the configured model and can incur costs; manual processors are also supported. Saved changes affect future incoming data. Banking fields are synthetic; automatic understanding of every source is not promised.
+
+## Streams data lifecycle
+
+[Official source](https://www.elastic.co/docs/solutions/observability/streams/configure-retention)
+
+Streams exposes retention and lifecycle choices. Available options depend on the release, stream type, privileges and subscription. Retention periods and storage phases are choices made by the bank; they do not automatically satisfy a regulatory requirement.
+
+## Elastic Workflows overview
+
+[Official source](https://www.elastic.co/docs/explore-analyze/workflows)
+
+Core Workflows is GA from Stack 9.4, with Enterprise entitlement on self-managed and Elastic Cloud Hosted. Individual steps and AI authoring have separate maturity and connection requirements. The banking runbook illustrates configured queries, conditions and actions; it is not an actual execution or customer result.
+
+## Set up Elastic Workflows
+
+[Official source](https://www.elastic.co/docs/explore-analyze/workflows/get-started/setup)
+
+Verify the intended version, subscription, feature availability and role privileges before enabling Workflows. Native Elastic queries and configured external actions have different access and connection requirements. A self-managed deployment does not establish that external actions or AI inference remain inside the bank.
+
+## Monitor workflow execution
+
+[Official source](https://www.elastic.co/docs/explore-analyze/workflows/authoring-techniques/monitor-workflows)
+
+Execution views expose workflow and step status, outputs and errors for operational review. The presentation's example history is illustrative. Execution history alone is not an immutable audit archive or proof of regulatory compliance.
+
+## Observability workflow patterns
+
+[Official source](https://www.elastic.co/docs/explore-analyze/workflows/use-cases/observability)
+
+Official patterns include anomaly-alert response, related log queries, service enrichment, cases, notifications and cross-signal queries with conditional actions. These support the proposed runbook; external integrations must be configured and the example triggers no customer-impacting change.
+
+## Elastic Workflows 9.4 general availability
+
+[Official source](https://www.elastic.co/security-labs/blog/elastic-workflows-ga-9-4)
+
+The official 9.4 release account states that core Workflows is GA across Security, Observability and Search, with Enterprise availability on Elastic Cloud Hosted and self-managed deployments. It distinguishes preview natural-language authoring. Usage-based execution pricing and promotions can change; no free or unlimited execution claim is made.
+
+## Workflows human review step
+
+[Official source](https://www.elastic.co/docs/explore-analyze/workflows/steps/wait-for-input)
+
+The waitForInput step is documented for Stack 9.4+ and pauses execution for structured human input. External delivery and dedicated approval steps have separate preview/version conditions. The presentation uses the bank's configured approval process and shows no automatic customer-impacting action.
+
+## OpenTelemetry with Elastic APM
+
+[Official source](https://www.elastic.co/docs/solutions/observability/apm/opentelemetry)
+
+Elastic accepts OpenTelemetry instrumentation alongside supported Elastic collection options. Language, signal, collector and deployment compatibility must be checked for the chosen release. Open instrumentation preserves collection choices; it does not mean every source is already instrumented or every feature is identical across deployment types.
+
+## Elasticsearch data tiers
+
+[Official source](https://www.elastic.co/docs/manage-data/lifecycle/data-tiers)
+
+Hot, warm, cold and frozen tiers support different access, performance and storage needs. Searchable snapshots require suitable object storage/repositories and entitlement. Longer retained history supports later investigation, subject to the bank's retention, access and cost decisions; no storage-saving percentage is promised.
+
+## Self-managed Elasticsearch
+
+[Official source](https://www.elastic.co/docs/deploy-manage/deploy/self-managed)
+
+Self-managed deployment gives the organization responsibility for installation, configuration, capacity, security, availability and upgrades. It supports operating-model choice; it does not establish Saudi hosting, regulatory approval, feature parity or local AI inference.
+
+## Machine learning anomaly detection
+
+[Official source](https://www.elastic.co/docs/explore-analyze/machine-learning/anomaly-detection)
+
+Machine learning can identify anomalous patterns in time-series telemetry. Appropriate data, jobs, privileges, capacity and entitlement are required. An anomaly is a signal for investigation and is not proof of the cause, prevention of every incident or a generative-AI diagnosis.
+
+## Application and service monitoring
+
+[Official source](https://www.elastic.co/docs/solutions/observability/applications)
+
+APM and tracing help teams examine application performance, errors and dependencies. End-to-end visibility depends on instrumentation and propagated context, including across external providers. A candidate cause must be verified, and API success is not proof of payment settlement.
+
+## Elastic for financial services
+
+[Official source](https://www.elastic.co/industries/financial-services)
+
+Public industry context for application performance, payment visibility, customer experience and operating-model choices. The presentation's banking use cases are proposed applications, not claims of the prospect's current implementation, quantified results or regulatory compliance.
 
 ## Elastic APM service maps
 
@@ -52,6 +142,6 @@ Elastic-published customer account: centralized logs stored on premises, plus AP
 
 ## Measurement boundaries
 
-Oney measures API-incident detection, from up to 20 minutes to 1 minute. WePay measures time to identify customer impact during incidents, 90% less; its published story uses Google Cloud and describes APM as future adoption. Emirates NBD describes on-premises logs and APM and reports days-to-minutes improvement for customer-facing issues. These are different measures and are not forecasts for the prospect.
+Oney measures API-incident detection, from up to 20 minutes to 1 minute. WePay measures time to identify customer impact during incidents, 90% less; its published story uses Google Cloud and describes APM as future adoption. Emirates NBD describes on-premises logs and APM and reports days-to-minutes improvement for customer-facing issues. These are different measures and are not forecasts for the prospect. None of these historical results is attributed to Streams or Workflows.
 
 The fictional incident separates a pending request, correlated evidence, a candidate explanation, an owner-verified finding and recovery checks. An accepted request alone does not establish settled funds; older pending requests require separate status/reconciliation checks.

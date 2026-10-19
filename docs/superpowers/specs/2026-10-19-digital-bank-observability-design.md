@@ -1,6 +1,6 @@
 # Reliable Digital Banking — presentation design
 
-Status: independently reviewed and approved by the user for implementation and separate public GitHub Pages delivery on 19 October 2026. Prepared 19 October 2026 for the customer meeting on 20 October 2026, Asia/Riyadh.
+Historical first-release design. Superseded by [the user-directed differentiation revision](2026-10-19-digital-bank-differentiation-revision.md) after the user requested stronger Elastic philosophy, Streams and Workflows. The original public delivery authorization remains in effect. Prepared 19 October 2026 for the customer meeting on 20 October 2026, Asia/Riyadh.
 
 ## Brief and decisions
 

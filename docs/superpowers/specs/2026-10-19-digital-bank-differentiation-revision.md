@@ -10,24 +10,24 @@ The original public reference's progression is Search AI foundation → Streams 
 
 ## Exactly 16 slides
 
-| # | Main idea | Visual and value | Seconds |
-|---|---|---|---:|
-| 1 | Elastic Observability for digital banking | Search foundation connects telemetry, understanding and action | 30 |
-| 2 | A connected bank needs connected answers | Mobile/API/payment/legacy complexity; separate tools fragment context | 60 |
-| 3 | Elastic philosophy: open, connected, actionable | Open collection → shared context → repeatable action | 60 |
-| 4 | Search the evidence behind the dashboard | Elasticsearch foundation brings logs, metrics, traces and business context into investigation | 60 |
-| 5 | Build on open collection | OpenTelemetry and Elastic integrations; preserve supported existing investments | 60 |
-| 6 | Streams: turn raw logs into useful evidence | Organize, parse, preview and govern log processing; less repeated pipeline work | 90 |
-| 7 | Streams in banking | Synthetic heterogeneous payment/API/legacy log formats become useful fields and searchable context; preview before publishing | 90 |
-| 8 | Connect the signals around one service | Logs explain events, metrics reveal change, traces locate delay, user experience adds impact | 75 |
-| 9 | RCA: move from symptom to verified explanation | Service degradation → trace → related logs/change evidence → engineer verification | 90 |
-| 10 | FSI use cases connected to customer outcomes | Payment exceptions, login/onboarding friction, card/channel reliability; proposed indicators, no invented results | 75 |
-| 11 | Workflows: connect insight to action | Triggers → contextual queries → conditional actions → execution history | 90 |
-| 12 | A repeatable banking incident runbook | Collect context, find owner, create/update incident, notify; bank approval and configured actions remain explicit | 90 |
-| 13 | Keep control of the operating model | Self-managed operation, searchable history, retention/access choices; planned dependencies and cost tradeoffs | 60 |
-| 14 | Emirates NBD: regional, on-premises proof | Centralized logs + APM; reported days to minutes to locate problems | 60 |
-| 15 | Oney and WePay: two precise results | Oney API-incident detection up to20min→1min; WePay90% less impact-identification time, distinct scope | 60 |
-| 16 | Why Elastic, and what to validate | Streams + connected investigation + Workflows; one service, agreed evidence and decision | 30 |
+| #   | Main idea                                       | Visual and value                                                                                                              | Seconds |
+| --- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------: |
+| 1   | Elastic Observability for digital banking       | Search foundation connects telemetry, understanding and action                                                                |      30 |
+| 2   | A connected bank needs connected answers        | Mobile/API/payment/legacy complexity; separate tools fragment context                                                         |      60 |
+| 3   | Elastic philosophy: open, connected, actionable | Open collection → shared context → repeatable action                                                                          |      60 |
+| 4   | Search the evidence behind the dashboard        | Elasticsearch foundation brings logs, metrics, traces and business context into investigation                                 |      60 |
+| 5   | Build on open collection                        | OpenTelemetry and Elastic integrations; preserve supported existing investments                                               |      60 |
+| 6   | Streams: turn raw logs into useful evidence     | Organize, parse, preview and govern log processing; less repeated pipeline work                                               |      90 |
+| 7   | Streams in banking                              | Synthetic heterogeneous payment/API/legacy log formats become useful fields and searchable context; preview before publishing |      90 |
+| 8   | Connect the signals around one service          | Logs explain events, metrics reveal change, traces locate delay, user experience adds impact                                  |      75 |
+| 9   | RCA: move from symptom to verified explanation  | Service degradation → trace → related logs/change evidence → engineer verification                                            |      90 |
+| 10  | FSI use cases connected to customer outcomes    | Payment exceptions, login/onboarding friction, card/channel reliability; proposed indicators, no invented results             |      75 |
+| 11  | Workflows: connect insight to action            | Triggers → contextual queries → conditional actions → execution history                                                       |      90 |
+| 12  | A repeatable banking incident runbook           | Collect context, find owner, create/update incident, notify; bank approval and configured actions remain explicit             |      90 |
+| 13  | Keep control of the operating model             | Self-managed operation, searchable history, retention/access choices; planned dependencies and cost tradeoffs                 |      60 |
+| 14  | Emirates NBD: regional, on-premises proof       | Centralized logs + APM; reported days to minutes to locate problems                                                           |      60 |
+| 15  | Oney and WePay: two precise results             | Oney API-incident detection up to20min→1min; WePay90% less impact-identification time, distinct scope                         |      60 |
+| 16  | Why Elastic, and what to validate               | Streams + connected investigation + Workflows; one service, agreed evidence and decision                                      |      30 |
 
 Total: 1,080 seconds, 18 minutes plus discussion. Routes #0–#15, no hidden appendix slides.
 

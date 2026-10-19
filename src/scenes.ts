@@ -3,533 +3,551 @@ import { S } from "./evidence";
 
 export const scenes: Scene[] = [
   {
-    id: "reliable-digital-banking",
-    chapter: "The customer promise",
-    eyebrow: "Reliable digital banking",
-    title: "Reliable digital",
-    emphasis: "banking",
-    lead: "How Elastic Observability connects customer experience with incident investigation.",
-    visual: 0,
-    takeaway: "Start with the journey the customer needs to complete.",
+    id: "elastic-observability-digital-banking",
+    chapter: "From data to action",
+    eyebrow: "ELASTIC OBSERVABILITY · DIGITAL BANKING",
+    title: "Elastic",
+    emphasis: "Observability",
+    lead: "Connect your data. Understand what matters. Make action repeatable.",
+    visual: 30,
+    takeaway: "From scattered telemetry to answers and action—on your terms.",
     detail:
-      "Connect a visible customer outcome to the operating evidence that can explain it.",
+      "Streams, connected investigation and Workflows, applied to digital banking.",
     qualification:
-      "Customer-neutral presentation. The transfer incident is fictional; no live bank data or transactions.",
+      "Original illustrations. Product availability depends on the deployed release and subscription.",
     requirements:
-      "The transfer journey and all incident observations are synthetic teaching examples. Product capabilities require appropriate collection, instrumentation, configuration, access and entitlement. Public customer results later in the presentation are attributed examples, not forecasts for this bank.",
-    sources: [S.observability],
-    steps: [
-      "Customer journey",
-      "Service path",
-      "Shared evidence",
-      "Reliable experience",
-    ],
-    illustrative: true,
+      "This is a customer-neutral presentation, not a live product environment. The banking examples are synthetic; no model, banking system or workflow is connected. The source reference informs the philosophy and visual flow, while all published narration and diagrams are original.",
+    sources: [S.observability, S.streams, S.workflows],
     notes: {
       opening:
-        "A reliable banking experience begins with a customer being able to finish what they came to do.",
-      body: "Today we will follow one transfer journey from a pending status to a checked recovery. The example is fictional, but the questions are practical: which journey is affected, where should an engineer look, and what evidence makes the next decision credible? Elastic Observability connects permitted operational signals so teams can investigate with shared context. It does not replace the service owner or the bank’s operating controls. We will finish by choosing one useful validation, with the actual target, data permissions and success measures agreed together.",
-      transition: "First, consider what the customer is expecting.",
+        "Elastic's Observability story starts with the data and finishes with a useful action.",
+      body: "A bank already has plenty of dashboards. The harder problem is connecting the evidence behind them. We will show the Elastic approach: collect openly, make logs useful through Streams, investigate across signals on a searchable foundation, then make routine response repeatable with Workflows. We will keep the examples close to banking and use published customer results to ground the discussion. The objective is to explain why these pieces belong together, rather than take you through a long configuration tour.",
+      transition:
+        "Start with the environment that makes this approach necessary.",
       seconds: 30,
-      prompt: "Which customer journey most needs a dependable experience?",
+      prompt: "Which part of that loop is hardest for your teams today?",
     },
+    steps: ["Collect", "Understand", "Act", "One connected loop"],
+    illustrative: false,
   },
   {
-    id: "customer-promise",
-    chapter: "The customer promise",
-    eyebrow: "Begin with the outcome",
-    title: "The customer",
-    emphasis: "promise",
-    lead: "Access the account. Make the payment. Know what happened.",
-    visual: 1,
-    takeaway:
-      "A healthy service matters when it supports a clear customer outcome.",
+    id: "connected-bank-connected-answers",
+    chapter: "The observability challenge",
+    eyebrow: "THE CHALLENGE · COMPLEXITY WITHOUT CONTEXT",
+    title: "A connected bank needs",
+    emphasis: "connected answers",
+    lead: "One customer experience can cross mobile apps, APIs, payment services and legacy systems.",
+    visual: 31,
+    takeaway: "More telemetry only helps when teams can connect it.",
     detail:
-      "Journey definitions connect technical signals to an experience customers and service owners can recognize.",
+      "Separate tools and separate views can turn an incident into a handoff exercise.",
     qualification:
-      "Illustrative outcomes. The bank defines success; an API response alone does not prove payment completion.",
+      "Illustrative bank architecture. Actual systems and telemetry coverage must be established.",
     requirements:
-      "These are discussion outcomes, not claims about the bank’s current services. The journey needs an agreed start, an observable end and an owner. Distinguish request acceptance, downstream completion, settlement and correct balances. Availability of each signal depends on permitted collection and instrumentation.",
-    sources: [S.observability, S.slo],
-    steps: ["Access", "Act", "Confirm", "Trust"],
-    illustrative: true,
+      "The diagram illustrates common banking dependencies; it does not describe the prospect's architecture or claim that Elastic automatically observes external providers, mainframes or every application. Sources, access and instrumentation define coverage.",
+    sources: [S.observability, S.fsi],
     notes: {
       opening:
-        "The customer sees one journey, even when many services support it.",
-      body: "Account access and payments have different technical paths, but the expectation is simple: the action should work and its status should be clear. A server can be healthy while a customer is still waiting. That is why we begin with a journey outcome rather than a component chart. For a transfer, accepting the request is only one stage. The bank must define which later signal represents completion and where settlement or balance checks belong. This definition gives business and technology teams a shared starting point for investigation.",
-      transition: "Choose one journey whose outcome and owner are clear.",
-      seconds: 45,
-      prompt:
-        "What tells your team that the customer has actually completed this journey?",
-    },
-  },
-  {
-    id: "journeys-that-matter",
-    chapter: "The customer promise",
-    eyebrow: "Select a meaningful journey",
-    title: "The journeys",
-    emphasis: "that matter",
-    lead: "Account opening, login, payments and cards each need an agreed view of success.",
-    visual: 3,
-    takeaway: "Begin with one journey whose outcome and owner are clear.",
-    detail:
-      "We will follow a transfer so that impact, investigation and recovery stay connected.",
-    qualification:
-      "Illustrative journey map. Coverage depends on permitted evidence and instrumentation.",
-    requirements:
-      "The four journeys are discussion examples, not an inventory of this bank’s systems. Select one journey with an owner, a defined outcome and accessible evidence. Technical failures, valid business decisions and customer abandonment require different interpretations. Do not infer complete coverage from a service map.",
-    sources: [S.observability, S.serviceMap],
-    steps: ["Account opening", "Login", "Payments", "Select transfer"],
-    illustrative: true,
-    notes: {
-      opening:
-        "A useful starting point is one journey the business already cares about.",
-      body: "Account opening, login, payments and card use all matter, but they should not be collapsed into one health indicator. Each has a different start, outcome, dependency path and operating owner. We will select transfers for this example and carry that same journey through the investigation. This keeps the discussion concrete without assuming an architecture. In a real validation, the team would also agree what remains outside the view, which events can be collected, and how technical failure differs from a valid business decision or a customer choosing to stop.",
-      transition:
-        "Now imagine a transfer that has not reached a clear outcome.",
-      seconds: 45,
-      prompt:
-        "Which journey has both a clear business owner and useful evidence today?",
-    },
-  },
-  {
-    id: "affected-journey",
-    chapter: "A shared investigation",
-    eyebrow: "Illustrative transfer incident · Define the impact",
-    title: "Which journey",
-    emphasis: "is affected?",
-    lead: "A subset of mobile transfers is still pending. Compare channels and request states to establish impact.",
-    visual: 5,
-    takeaway:
-      "Customer impact needs journey evidence as well as service health.",
-    detail:
-      "Pending is the observed symptom. Mobile includes pending requests; the web comparison shows accepted responses.",
-    qualification:
-      "Synthetic incident. Pending does not mean failed; accepted does not prove downstream completion or settlement.",
-    requirements:
-      "The transfer incident is synthetic, with no actual customer, account, amount, transaction or provider. Pending is an observed request state, not a verified cause or proof of failure. Do not advise a retry without appropriate status checks. This channel comparison uses labels rather than production counts or a representative cohort. Web acceptance does not establish downstream completion or settlement. Agree eligible requests and the downstream outcome before calculating a completion rate.",
-    sources: [S.observability, S.wepay],
-    steps: [
-      "Shared window",
-      "Compare channels",
-      "Inspect states",
-      "Bound the impact",
-    ],
-    illustrative: true,
-    notes: {
-      opening:
-        "Some mobile transfer requests are still pending; first, establish the affected journey.",
-      body: "The customer has submitted a transfer and cannot yet see a clear completion state. We have a symptom, not a root cause. Pending should not be treated as failed or used to blame a provider. Compare mobile and web over the same incident window: mobile includes pending requests, while the web comparison shows accepted responses. Acceptance does not prove downstream completion or settlement. Check cohorts, missing evidence and the agreed completion signal. All observations are fictional. This shared impact description gives support and engineering a bounded question to investigate.",
-      transition:
-        "Different teams can now investigate the same bounded incident.",
-      seconds: 90,
-      prompt:
-        "Which channel and state comparisons would make an incident update useful?",
-    },
-  },
-  {
-    id: "evidence-across-teams",
-    chapter: "A shared investigation",
-    eyebrow: "Elastic Observability · Shared evidence",
-    title: "Evidence across",
-    emphasis: "teams",
-    lead: "Elastic Observability connects permitted evidence in a shared, searchable investigation view.",
-    visual: 6,
-    takeaway:
-      "Give support, operations and engineering context they can search together.",
-    detail:
-      "Connect a journey, incident window and approved request context across logs, metrics and traces.",
-    qualification:
-      "Coverage depends on collection, instrumentation, configuration and permissions; entitlement also applies.",
-    requirements:
-      "Elasticsearch provides the searchable foundation; Elastic Observability connects logs, metrics, traces and experience evidence. Logs describe events, metrics show changing conditions, and traces follow instrumented requests. Collection, useful fields, time alignment, trace context, retention and role-based access determine the available view. Missing evidence is not proof that a dependency is healthy. Confirm the actual deployment, release and subscription; no complete-estate coverage or automatic cause verification is implied.",
-    sources: [S.observability, S.serviceMap, S.subscriptions],
-    steps: [
-      "Support context",
-      "Operations evidence",
-      "Engineering detail",
-      "Shared incident",
-    ],
-    illustrative: true,
-    notes: {
-      opening:
-        "Elastic Observability gives teams a shared place to search the evidence behind a journey.",
-      body: "Elasticsearch provides the searchable foundation. Logs describe events, metrics show changing conditions, and traces follow an instrumented request. These views help support, operations and engineers investigate the same journey, time window and approved request context. An application event may show a connection wait; a trend shows when it increased; a trace places it in the request path. Collection, instrumentation, configuration, permissions and entitlement define what is visible. Gaps do not prove a dependency is healthy. The owner still checks the explanation, while each team sees only the evidence its role allows.",
-      transition:
-        "Follow the transfer through the part of the request path that is instrumented.",
-      seconds: 75,
-      prompt: "What information most often disappears between teams today?",
-    },
-  },
-  {
-    id: "transfer-path",
-    chapter: "A shared investigation",
-    eyebrow: "Follow the observed request",
-    title: "The path of a",
-    emphasis: "transfer request",
-    lead: "Follow the request through the gateway into the payment service.",
-    visual: 9,
-    takeaway: "A request path helps locate delay within the observed boundary.",
-    detail:
-      "The external provider remains outside the observed boundary unless its instrumentation is established.",
-    qualification:
-      "Synthetic trace. Instrumentation and trace context define coverage; provider internals are unobserved.",
-    requirements:
-      "The diagram illustrates a logical request path, not this bank’s architecture. Service relationships depend on instrumentation and propagated context. A slow observed span identifies where time was spent within the available view; it does not independently establish the cause. External-provider internals stay unobserved, and downstream completion needs its own permitted signal.",
-    sources: [S.serviceMap, S.observability],
-    steps: [
-      "Mobile request",
-      "Gateway",
-      "Payment service",
-      "Observe the boundary",
-    ],
-    illustrative: true,
-    notes: {
-      opening:
-        "We can now follow an observed request toward the place it waits.",
-      body: "The fictional path runs from a mobile app through a gateway into a payment service and then toward an external provider. The payment service is instrumented, so the team can inspect its request timing and relevant events. The provider’s internal operations remain gray because we have not established visibility there. A service map is a view of observed relationships, not proof of complete estate coverage. This narrows where to investigate, but a slow segment still needs supporting evidence. In particular, a delay inside a service should not become an untested accusation about an outside provider.",
-      transition: "Bring together the evidence around the waiting time.",
-      seconds: 90,
-      prompt: "Where does your visibility stop along a critical payment path?",
-    },
-  },
-  {
-    id: "delay-evidence",
-    chapter: "A shared investigation",
-    eyebrow: "From observation to candidate",
-    title: "Evidence behind",
-    emphasis: "the delay",
-    lead: "Request timing, connection-wait events and a configuration record point to a candidate explanation.",
-    visual: 10,
-    takeaway:
-      "A plausible explanation is a question to check, not a verified cause.",
-    detail:
-      "The timing aligns with an approved change record. The owner still needs to inspect the setting and alternatives.",
-    qualification:
-      "Synthetic evidence. Correlation and a slow trace alone do not establish causality.",
-    requirements:
-      "In this fictional incident, the observed wait is connection acquisition within the payment service. A configuration-change record is relevant context, not an automatic root-cause finding. Confirm time alignment, whether the change reached the affected instances, the actual connection limit, and competing explanations such as demand, slow downstream responses or resource pressure.",
-    sources: [S.observability, S.serviceMap],
-    steps: [
-      "Request waiting",
-      "Connection events",
-      "Change context",
-      "Candidate explanation",
-    ],
-    illustrative: true,
-    notes: {
-      opening:
-        "The evidence suggests a connection-limit question that the owner can test.",
-      body: "Request timing places the wait in the payment service. Application events identify connection acquisition, and an approved configuration-change record appears in the relevant window. Together, these make a reduced connection limit a plausible candidate. They do not prove it caused the incident. The owner should check the actual setting on the affected service and compare demand, downstream response conditions and resource pressure. This distinction keeps the investigation honest: an observation tells us what happened, correlated context suggests a question, and a verified finding requires the responsible owner to check that question.",
-      transition:
-        "The service owner now checks the candidate against the alternatives.",
-      seconds: 90,
-      prompt: "What evidence would make this candidate more or less credible?",
-    },
-  },
-  {
-    id: "owner-verifies-cause",
-    chapter: "A shared investigation",
-    eyebrow: "Verification belongs to the owner",
-    title: "The owner",
-    emphasis: "verifies the cause",
-    lead: "The owner checks the setting and competing explanations before confirming the finding.",
-    visual: 11,
-    takeaway: "The fictional finding: an incorrectly reduced connection limit.",
-    detail:
-      "The owner confirms the deployed setting and checks demand, downstream timing and resource pressure.",
-    qualification:
-      "Synthetic owner-verified finding. A chart or correlation alone does not prove a cause.",
-    requirements:
-      "This is a prepared fictional finding, not a live diagnosis. The service owner confirms the effective reduced limit on the affected service and checks whether demand, downstream delay or resource pressure better explains the wait. Only then is the candidate treated as verified in this example. Restoration remains subject to the bank’s normal approval process; nothing is executed by the presentation.",
-    sources: [S.observability, S.serviceMap],
-    steps: [
-      "Inspect setting",
-      "Check alternatives",
-      "Confirm finding",
-      "Approve next action",
-    ],
-    illustrative: true,
-    notes: {
-      opening: "A candidate becomes a finding only after the owner checks it.",
-      body: "The owner inspects the effective configuration on the affected payment service and confirms that the connection limit was incorrectly reduced. They also examine demand, downstream timing and resource pressure so the explanation does not rest only on a matching timestamp. In this fictional incident, those checks support the configuration finding. The next action is then proposed through the bank’s normal change process. Elastic supplies evidence for that decision; the owner remains responsible for verifying the explanation and approving the response. The presentation performs no configuration change or other action.",
-      transition: "A checked explanation now needs a checked recovery.",
-      seconds: 90,
-      prompt: "Who should verify this finding and approve the restoration?",
-    },
-  },
-  {
-    id: "customer-confirmed-recovery",
-    chapter: "A shared investigation",
-    eyebrow: "Check the outcome after restoration",
-    title: "Recovery the customer",
-    emphasis: "can confirm",
-    lead: "Restore the approved setting, check fresh requests and verify the agreed downstream completion signal.",
-    visual: 12,
-    takeaway:
-      "Fresh recovery checks and earlier pending transfers are separate work.",
-    detail:
-      "The owner checks new request behavior. Operations separately reviews and reconciles earlier pending transfers.",
-    qualification:
-      "Synthetic recovery. API success alone does not establish settlement or correct balances; reconcile earlier pending transfers.",
-    requirements:
-      "Restoration is an owner-approved change, not automated remediation. Check fresh requests against the agreed completion signal and watch for recurrence. Do not infer settlement or correct balances from an API response. Earlier pending transfers require a separate status and reconciliation process, including any necessary exceptions and customer communication under the bank’s procedures.",
-    sources: [S.observability, S.slo],
-    steps: [
-      "Approved restore",
-      "Fresh requests",
-      "Downstream check",
-      "Reconcile earlier pending",
-    ],
-    illustrative: true,
-    notes: {
-      opening: "Recovery means checking the journey after the approved change.",
-      body: "The owner restores the approved connection setting through the normal change process. The team then checks fresh requests and the agreed downstream completion signal, while watching for the waiting pattern to return. A successful API response is useful but does not establish settlement or correct balances. Earlier pending transfers form a separate queue of status and reconciliation work; they do not disappear because new requests look healthy. This separation gives the incident team a clearer recovery statement and helps operations decide what remains open for customer communication or exception handling.",
-      transition:
-        "The same journey definition can support an ongoing reliability target.",
-      seconds: 75,
-      prompt:
-        "What evidence is required before you can declare this journey recovered?",
-    },
-  },
-  {
-    id: "journey-targets",
-    chapter: "Operational choices",
-    eyebrow: "Define success before setting a target",
-    title: "Reliability targets",
-    emphasis: "for the journey",
-    lead: "Define a good journey, then compare its evidence through demand and release changes.",
-    visual: 13,
-    takeaway:
-      "Choose a target that reflects the customer outcome you can observe.",
-    detail:
-      "Use the same journey measure before and after a change, with comparable demand and an agreed review window.",
-    qualification:
-      "No target is prescribed. SLOs need entitlement and configuration; API success does not establish settled payments.",
-    requirements:
-      "Confirm the appropriate subscription, privileges and SLO configuration. Define eligible events, good events, exclusions, target, time window and evidence owner. An API-level indicator does not automatically measure transfer completion, settlement or correct balances. Before/after release comparisons require suitable windows, comparable demand, consistent definitions and known instrumentation. A change record is context, not proof of cause. The owner chooses further checks or follows the release and rollback process. No bank target, automatic capacity fix or incident-prevention guarantee is prescribed.",
-    sources: [S.slo, S.subscriptions],
-    steps: [
-      "Define the outcome",
-      "Choose the measure",
-      "Agree the target",
-      "Review the window",
-    ],
-    illustrative: true,
-    notes: {
-      opening:
-        "A useful reliability target starts with a precise definition of a good journey.",
-      body: "Agree which requests are eligible and which observed event counts as a good outcome, then choose the target and review period. API success does not establish settled payments. Elastic SLOs require appropriate entitlement and configuration. The same journey measure can also inform a release or peak-demand review: compare suitable windows before and after the change, check demand and evidence gaps, then inspect relevant service conditions. A matching timestamp does not prove a cause. The owner decides whether to continue, investigate or follow the rollback process; the evidence does not automatically fix capacity.",
-      transition:
-        "The evidence and its supporting services need an approved operating model.",
-      seconds: 75,
-      prompt:
-        "What is the most useful observable definition of a successful transfer?",
-    },
-  },
-  {
-    id: "operating-model",
-    chapter: "Operational choices",
-    eyebrow: "Choose the approved evidence path",
-    title: "Control over the",
-    emphasis: "operating model",
-    lead: "Self-managed operation can keep the evidence platform within the bank’s chosen environment.",
-    visual: 16,
-    takeaway:
-      "Agree access, retention, collection and every required data flow.",
-    detail:
-      "Plan collection, package and upgrade access, support arrangements and the complete approved data flow.",
-    qualification:
-      "Self-managed is an option, not a compliance assurance. Package, upgrade and support flows need review.",
-    requirements:
-      "Confirm the actual deployment topology, release, subscription, roles, retention and collection requirements. Restricted-network operation needs an approved package, artifact, upgrade and support path. Review the complete data flow and external dependencies rather than assuming that self-managed deployment removes them. No Saudi hosting, regulator approval, blanket feature parity or automatic compliance is claimed.",
-    sources: [S.airGapped, S.subscriptions],
-    steps: [
-      "Chosen environment",
-      "Scoped access",
-      "Retention policy",
-      "Approved data flows",
-    ],
-    illustrative: true,
-    notes: {
-      opening: "The operating model should fit the bank’s approved boundaries.",
-      body: "Elastic supports self-managed operation, including environments where network access is restricted. That choice still needs an end-to-end plan: collection, user access, retention, package access, upgrades and support. Feature entitlement and the intended release also need confirmation. Review the complete data path and external dependencies instead of assuming the deployment choice resolves every operating requirement. The practical outcome is an evidence platform that operations can run within the bank’s chosen boundaries. The bank still decides its policies and approvals; self-managed deployment is not a blanket assurance of regulatory compliance or local hosting for every dependency.",
-      transition:
-        "Three public customer stories illustrate different outcomes worth discussing.",
+        "Your customer sees one banking experience. Your engineers may see many separate systems.",
+      body: "A slow payment could involve the app, identity checks, an API, a queue, a core platform or an external provider. Each team may be looking at a different tool and a different clock. Adding another chart does not necessarily connect those views. The business cost is the delay in answering simple questions: what is affected, where should we investigate, and who should act? This is why the Elastic story starts with shared evidence, rather than an isolated view of one component.",
+      transition: "Elastic approaches that problem with three connected ideas.",
       seconds: 60,
       prompt:
-        "Which deployment and data-flow boundaries should a validation respect?",
+        "Where do investigations most often cross a team or tool boundary?",
     },
+    steps: [
+      "One customer experience",
+      "Many dependencies",
+      "Separate evidence",
+      "Context is the missing link",
+    ],
+    illustrative: true,
   },
   {
-    id: "oney-detection",
-    chapter: "Public customer evidence",
-    eyebrow: "Oney Bank · Reported customer outcome",
-    title: "Oney Bank:",
-    emphasis: "earlier detection",
-    lead: "API-incident detection moved from up to 20 minutes to one minute.",
-    visual: 18,
+    id: "elastic-observability-philosophy",
+    chapter: "The Elastic philosophy",
+    eyebrow: "THE PHILOSOPHY · OPEN → CONNECTED → ACTIONABLE",
+    title: "Open. Connected.",
+    emphasis: "Actionable.",
+    lead: "Bring data in openly, preserve its context, and turn useful findings into repeatable action.",
+    visual: 32,
     takeaway:
-      "Measure the time to detect an incident separately from the time to resolve it.",
+      "Streams prepares the evidence. Investigation connects it. Workflows puts it to work.",
     detail:
-      "Oney describes shared operational data across business, development and operations teams.",
+      "A shared Elasticsearch foundation supports the loop from telemetry to operational outcome.",
     qualification:
-      "Elastic-published customer result. Measure: API-incident detection, not resolution or MTTR. Results are not a forecast.",
+      "Architecture overview. Collection, correlation and automation require configuration and appropriate access.",
     requirements:
-      "The detailed public account says prior API-incident detection could take up to 20 minutes and later took one minute. This is not an MTTR, downtime or universal detection guarantee. The story does not establish an on-premises deployment. Its other availability and cost headlines are not used because their scope should not be generalized to this bank.",
-    sources: [S.oney],
+      "These are supported capability families, not a claim of zero configuration or automatic coverage. Streams, APM, anomaly detection and Workflows have individual version, entitlement and operational requirements. The presentation does not promise autonomous root cause verification or remediation.",
+    sources: [S.observability, S.streams, S.workflows],
+    notes: {
+      opening: "The differentiator is how the pieces work together.",
+      body: "Open means meeting the bank's data where it is, including OpenTelemetry and supported existing collectors. Connected means the logs, performance trends and request paths can contribute to the same investigation. Actionable means an alert can start an authored sequence that gathers context and coordinates a response. Streams is the log-management part of that story; Workflows is the repeatable-action part. Elasticsearch supplies the shared search and analytics foundation. We will unpack those mechanisms, then apply them to banking rather than treating them as a list of product names.",
+      transition:
+        "First, why does the search foundation matter when something goes wrong?",
+      seconds: 60,
+      prompt:
+        "Which matters most: preparing data, connecting evidence, or coordinating action?",
+    },
     steps: [
-      "API incidents",
-      "Up to 20 minutes",
-      "One minute",
-      "Detection defined",
+      "Open collection",
+      "Connected context",
+      "Repeatable action",
+      "Shared search foundation",
     ],
     illustrative: false,
-    notes: {
-      opening:
-        "Oney Bank reports a specific improvement in API-incident detection.",
-      body: "The public Elastic customer story describes detection falling from up to twenty minutes to one minute on APIs. The metric matters: it is time to detect an incident, not time to repair it or restore a payment. Oney also describes shared data across business, development and operations. We can use the example to discuss an earlier signal and a common operational view. It is a vendor-published result from a particular customer, not an independent benchmark or a forecast for this bank, and it does not establish an on-premises deployment.",
-      transition:
-        "WePay reports a different part of the incident timeline: understanding customer impact.",
-      seconds: 60,
-      prompt:
-        "How do you define the start and end of incident detection today?",
-    },
   },
   {
-    id: "wepay-impact",
-    chapter: "Public customer evidence",
-    eyebrow: "WePay · Reported customer outcome",
-    title: "WePay: clearer",
-    emphasis: "customer impact",
-    lead: "WePay reports 90% less time to identify customer impact during incidents.",
-    visual: 19,
+    id: "search-beyond-the-dashboard",
+    chapter: "Search as the foundation",
+    eyebrow: "DIFFERENTIATOR · SEARCH THE EVIDENCE BEHIND THE VIEW",
+    title: "Search beyond",
+    emphasis: "the dashboard",
+    lead: "Ask a new question across events, service behavior and request context—not just a prebuilt chart.",
+    visual: 33,
     takeaway:
-      "Faster impact identification helps teams agree who and what is affected.",
+      "The next question does not have to be the one the dashboard designer anticipated.",
     detail:
-      "The story describes shared logging and telemetry in a Google Cloud environment; APM was a future plan.",
+      "Elasticsearch search and analytics help teams explore structured fields and unstructured event detail.",
     qualification:
-      "Reported impact-identification result, not MTTR or downtime. Google Cloud context; APM was a future plan. No forecast.",
+      "Illustrative investigation. Queries use available, permitted data; correlation does not establish cause.",
     requirements:
-      "This Elastic-published account reports a 90% reduction in time to identify customer impact during incidents through consolidated logging and telemetry. It does not report a 90% reduction in incidents, failed payments, downtime or MTTR. The deployment context is Google Cloud, and the story describes APM adoption as a future plan; do not attribute the reported result to APM or use it as on-premises proof.",
-    sources: [S.wepay],
+      "The diagram shows related evidence retrieved and examined in one investigation, not a promise that one natural-language prompt or a single query automatically joins every telemetry source. Appropriate indexing, fields, time alignment and permissions are required. Supporting records remain inspectable.",
+    sources: [S.observability, S.apmOverview],
+    notes: {
+      opening:
+        "A dashboard is a useful starting point. An incident creates questions you did not prepare in advance.",
+      body: "Suppose payment latency rises. The team needs more than the average: which service, channel, release and event pattern changed? Elasticsearch lets teams search and analyze the evidence behind the view, including structured fields and the original event detail. In this illustration a trend, a request path and relevant logs converge around the same question. That helps the team explore the unfamiliar rather than stop at a fixed set of charts. Related evidence narrows the investigation; the engineer still checks the explanation.",
+      transition:
+        "The foundation becomes useful when we can collect the right evidence without closing off our options.",
+      seconds: 60,
+      prompt:
+        "What question usually forces your team out of its dashboard into another tool?",
+    },
     steps: [
-      "Shared telemetry",
-      "Incident context",
-      "Customer impact",
-      "90% less time",
+      "Ask a banking question",
+      "Find related evidence",
+      "Connect the context",
+      "Investigate beyond the chart",
+    ],
+    illustrative: true,
+  },
+  {
+    id: "open-collection-choice",
+    chapter: "Open by design",
+    eyebrow: "DIFFERENTIATOR · OPEN COLLECTION",
+    title: "Open collection.",
+    emphasis: "More choice.",
+    lead: "Use OpenTelemetry and supported Elastic integrations across the environments you operate.",
+    visual: 34,
+    takeaway:
+      "Start with useful data and supported collectors; expand as the bank sees value.",
+    detail:
+      "Elastic distributions of OpenTelemetry support an open instrumentation approach.",
+    qualification:
+      "Supported collection paths vary by signal, language, collector, release and deployment.",
+    requirements:
+      "OpenTelemetry compatibility does not mean every agent or vendor format works unchanged. Validate instrumentation, collector configuration and trace-context propagation. Self-managed environments need a supported ingest path and approved package/update access; no mandatory migration of every source is implied.",
+    sources: [S.otel, S.airGapped],
+    notes: {
+      opening:
+        "Open collection is a practical choice for a bank with investments it wants to keep.",
+      body: "Elastic supports OpenTelemetry, including Elastic distributions, alongside its integrations and collection options. That means the discussion can start with an important service and the evidence already available, rather than demand an estate-wide replacement on day one. The value is flexibility in instrumentation and deployment, with a deliberate path to broader coverage. We would check the bank's languages, collectors, network boundaries and operational standards. Open standards create options; they do not remove the need to validate the actual collection path.",
+      transition:
+        "Collecting logs is only the beginning. Streams helps make that data useful.",
+      seconds: 60,
+      prompt:
+        "Which collection investments or standards must a new platform preserve?",
+    },
+    steps: [
+      "OpenTelemetry",
+      "Elastic integrations",
+      "Supported existing sources",
+      "A shared ingest path",
     ],
     illustrative: false,
-    notes: {
-      opening:
-        "WePay’s reported ninety percent result concerns identifying customer impact.",
-      body: "The Elastic customer account describes shared logging and telemetry helping WePay identify customer impact during incidents in ninety percent less time. This answers the question of who or what is affected. It does not mean ninety percent fewer incidents, less downtime or faster restoration. The context is Google Cloud, and the story describes Elastic APM adoption as a future plan, so the result should not be attributed to APM. Like Oney, this is a customer-reported example rather than a forecast. It gives us another measure to define in a validation.",
-      transition:
-        "Emirates NBD provides a regional example of shared investigation with on-premises evidence.",
-      seconds: 60,
-      prompt:
-        "How quickly can the team establish the customer impact of a payment incident?",
-    },
   },
   {
-    id: "emirates-nbd-investigation",
-    chapter: "Public customer evidence",
-    eyebrow: "Emirates NBD · Reported customer outcome",
+    id: "streams-make-logs-useful",
+    chapter: "Streams",
+    eyebrow: "STREAMS · FROM INGEST TO INVESTIGATION",
+    title: "Streams:",
+    emphasis: "make logs useful",
+    lead: "A guided place to process, inspect and manage the logs your teams depend on.",
+    visual: 35,
+    takeaway:
+      "Spend less effort reconstructing log meaning before the investigation can begin.",
+    detail:
+      "Extract useful fields, preview the result, inspect data quality and manage the stream's lifecycle.",
+    qualification:
+      "Streams management: Stack 9.2+. AI assistance needs an approved model and entitlement; features vary by version.",
+    requirements:
+      "The example uses log processing and management. Wired partitioning and Streams-specific workflow actions have separate Preview status and are not required by this story. AI pipeline suggestions are optional and require a configured generative AI connector. Review parsing accuracy, data quality, privileges and retention before applying changes; no universal savings or automatic understanding of every format is promised.",
+    sources: [S.streams, S.processing, S.streamLifecycle],
+    notes: {
+      opening:
+        "Streams addresses the work between receiving logs and being able to investigate them.",
+      body: "Banks have many log formats. If the service name, channel or outcome is buried in a string, teams first have to work out what the event means. Streams brings processing and log management into a guided experience: extract fields, inspect a preview and apply a reviewed change. AI can help suggest processing when an approved model is configured. The differentiator is making this preparation visible alongside the data that investigators use. It is a way to reduce repeated preparation work, not a claim that parsing or governance disappears.",
+      transition: "Here is that idea applied to a small banking example.",
+      seconds: 90,
+      prompt:
+        "How much investigation time starts with finding or fixing a log format?",
+    },
+    steps: [
+      "Raw log formats",
+      "Process and extract",
+      "Preview and review",
+      "Queryable, managed evidence",
+    ],
+    illustrative: false,
+  },
+  {
+    id: "streams-banking-example",
+    chapter: "Streams in banking",
+    eyebrow: "STREAMS · ILLUSTRATIVE BANKING EXAMPLE",
+    title: "Streams:",
+    emphasis: "from raw logs to answers",
+    lead: "Make API and legacy payment events understandable through useful, consistent fields.",
+    visual: 36,
+    takeaway:
+      "Ask about the payment service and outcome, rather than decode a different log format each time.",
+    detail:
+      "The processing preview checks fields such as service, channel and observed outcome before a change is applied.",
+    qualification:
+      "Synthetic log-processing illustration. Parsing is configured and reviewed; request status is not payment settlement.",
+    requirements:
+      "The authored example is not a real Kibana capture. It contains no customer, account, provider or transaction identifiers. Field extraction must be tested against representative permitted samples, with failed processing visible for review. It does not rely on wired-stream partitioning, arbitrary joins or a prebuilt banking data model. An observed request status does not prove final payment completion.",
+    sources: [S.processing, S.streams],
+    notes: {
+      opening:
+        "Imagine two systems describe the same kind of payment-service issue in different formats.",
+      body: "One API emits a structured event; a legacy application writes a line of text. We prepare fields that help the investigator: service, channel and observed outcome. Streams processing and its preview let the owner check the extraction before saving the change. Once those fields are useful, the team can filter the evidence consistently and compare related behavior. This is the business consequence of better log preparation: less decoding before asking what is affected. The illustration stays at request evidence; settlement and reconciliation need their own agreed sources.",
+      transition:
+        "Prepared logs become more powerful when the surrounding signals are connected.",
+      seconds: 90,
+      prompt:
+        "Which important banking source is hardest to make searchable today?",
+    },
+    steps: [
+      "API and legacy formats",
+      "Extract useful fields",
+      "Inspect the preview",
+      "Search with banking context",
+    ],
+    illustrative: true,
+  },
+  {
+    id: "connected-signals-one-service",
+    chapter: "Connected signals",
+    eyebrow: "DIFFERENTIATOR · SHARED SERVICE CONTEXT",
+    title: "One service.",
+    emphasis: "Connected signals.",
+    lead: "Logs, metrics, traces and user experience answer different parts of the same question.",
+    visual: 37,
+    takeaway:
+      "Move from a symptom to its supporting evidence while keeping the service in context.",
+    detail:
+      "Metrics show change, traces locate delay, logs explain events, and experience data adds customer impact.",
+    qualification:
+      "Coverage depends on instrumentation and shared context. Anomaly detection requires a supported configuration and subscription.",
+    requirements:
+      "Not every telemetry source is automatically correlated. Service identity, timestamps and trace context must be configured appropriately. ML can surface unusual behavior relative to a learned baseline; it does not verify causality or replace service-level targets. Each experience or infrastructure view depends on available instrumentation.",
+    sources: [S.observability, S.apmOverview, S.ml],
+    notes: {
+      opening:
+        "The point is not collecting four signals for their own sake. Each explains something different.",
+      body: "A metric shows that latency changed. A trace helps locate where a request waited. A log supplies event detail, and user-experience evidence helps establish who felt the problem. Elastic brings these investigation paths around shared service context. Anomaly detection can highlight unusual behavior, while service targets express what the bank considers acceptable. This is a stronger starting point for RCA than looking at each signal in isolation. The actual view remains bounded by instrumentation; a missing provider trace is a gap to acknowledge, not a healthy green box.",
+      transition: "Now use that connected evidence to investigate a cause.",
+      seconds: 75,
+      prompt: "Which signal-to-signal handoff is hardest during an incident?",
+    },
+    steps: [
+      "Metrics: what changed?",
+      "Traces: where?",
+      "Logs: what happened?",
+      "Experience: who is affected?",
+    ],
+    illustrative: false,
+  },
+  {
+    id: "rca-follow-the-evidence",
+    chapter: "Root cause investigation",
+    eyebrow: "RCA · CONTEXT BEFORE CONCLUSION",
+    title: "RCA:",
+    emphasis: "follow the evidence",
+    lead: "Connect service degradation, request timing, log events and change context in one investigation.",
+    visual: 38,
+    takeaway:
+      "Elastic narrows the search. The service owner verifies the explanation.",
+    detail:
+      "In this fictional example, connection waits and a configuration change lead to a candidate that the owner checks.",
+    qualification:
+      "Illustrative RCA. Correlation is a candidate, not a verified cause; external-provider internals remain unobserved.",
+    requirements:
+      "The fictional owner checks the actual setting, capacity, database health and alternative explanations before confirming an incorrectly reduced connection limit. This is not a real investigation or an autonomous diagnosis. Recovery requires approved action and separate checks; an API success response alone does not establish settled funds or correct balances.",
+    sources: [S.apmOverview, S.serviceMap],
+    notes: {
+      opening:
+        "The useful RCA story is a short chain of evidence that an engineer can check.",
+      body: "A service slows down. The request trace locates a wait; related logs describe connection acquisition; the change record points to a configuration adjustment. That is a candidate explanation, not a conclusion. The service owner checks the setting and competing possibilities before confirming the fictional finding. Elastic's contribution is connecting the relevant evidence and reducing blind handoffs. It does not create visibility inside an uninstrumented payment provider. This distinction makes the demonstration credible: the team can explain both what it knows and what still needs checking.",
+      transition:
+        "The same approach can support several high-value banking questions.",
+      seconds: 90,
+      prompt:
+        "What evidence does your incident owner need before accepting an RCA?",
+    },
+    steps: [
+      "See the degradation",
+      "Locate the wait",
+      "Inspect related evidence",
+      "Owner verifies the cause",
+    ],
+    illustrative: true,
+  },
+  {
+    id: "banking-use-cases",
+    chapter: "FSI applications",
+    eyebrow: "FSI · CONNECT THE PLATFORM TO BANKING OUTCOMES",
+    title: "Built for the",
+    emphasis: "banking questions",
+    lead: "Apply the same evidence platform to payments, account access and channel reliability.",
+    visual: 39,
+    takeaway:
+      "Prioritize the banking outcome, then connect the technical evidence that explains it.",
+    detail:
+      "Track observed exceptions, journey errors and service delay using explicitly defined indicators.",
+    qualification:
+      "Proposed use cases and indicators, not measured prospect outcomes. Payment acceptance and settlement are distinct.",
+    requirements:
+      "The bank defines event eligibility, completion, target and review window. Login/onboarding evidence must respect access and data minimization requirements. Card and payment-provider coverage depends on available integrations and instrumentation. These use cases do not claim reduced fraud, revenue uplift or regulatory compliance.",
+    sources: [S.fsi, S.enbd, S.slo],
+    notes: {
+      opening:
+        "The banking value is concrete even when the platform underneath is shared.",
+      body: "For payments, the question is which requests are delayed or exceptional and what downstream evidence confirms the outcome. For login and onboarding, it is where customers encounter errors or friction. For cards and digital channels, it is whether service behavior explains a customer-facing problem. Streams helps prepare the evidence; connected investigation helps explain it. The bank chooses the indicators and their meaning. We should not turn an accepted request into a claim of settlement, or turn an infrastructure alert into a measured customer impact without supporting data.",
+      transition:
+        "Once the evidence is useful, the next differentiator is putting it to work.",
+      seconds: 75,
+      prompt:
+        "Which of these use cases would have the clearest operational owner?",
+    },
+    steps: [
+      "Payment exceptions",
+      "Login and onboarding friction",
+      "Card and channel reliability",
+      "Shared evidence, distinct outcomes",
+    ],
+    illustrative: true,
+  },
+  {
+    id: "workflows-insight-to-action",
+    chapter: "Workflows",
+    eyebrow: "WORKFLOWS · DATA-AWARE AUTOMATION",
+    title: "Workflows:",
+    emphasis: "turn insight into action",
+    lead: "An authored sequence can query Elastic, apply conditions and coordinate the next steps.",
+    visual: 40,
+    takeaway:
+      "Automate the repeatable investigation work where the evidence already lives.",
+    detail:
+      "Manual, scheduled or alert triggers pass context through steps; execution history makes each run inspectable.",
+    qualification:
+      "Workflows: Stack 9.4+ GA, Enterprise. Enable the feature; permissions, actions and external integrations must be configured.",
+    requirements:
+      "Core Workflows uses versionable definitions and configured actions. Native Elasticsearch queries differ from external ticketing, notification or HTTP integrations, which need their own credentials, network path and authorization. Steps and integrations can have separate maturity. This example does not use Preview Streams-specific workflow steps or execute a customer-impacting action.",
+    sources: [S.workflows, S.workflowSetup, S.workflowHistory],
+    notes: {
+      opening:
+        "A finding is valuable. A repeatable way to use it is the next step.",
+      body: "Workflows lets a team define what should happen when an alert arrives, on a schedule or when a person starts a run. The sequence can query Elastic for context, test a condition, and call configured actions. Think of it as a reusable operational recipe, with execution history showing the steps and outputs. This connects the evidence platform to everyday work instead of asking an operator to copy the same information between tools. The recipe and its permissions are designed by the team; nothing in this presentation runs against a live system.",
+      transition:
+        "For a bank, start with low-risk coordination before considering a controlled response.",
+      seconds: 90,
+      prompt:
+        "Which response steps are repeated manually on almost every incident?",
+    },
+    steps: [
+      "A trigger starts the run",
+      "Query useful context",
+      "Branch on a condition",
+      "Act and inspect the run",
+    ],
+    illustrative: false,
+  },
+  {
+    id: "workflows-banking-runbook",
+    chapter: "Workflows in banking",
+    eyebrow: "WORKFLOWS · ILLUSTRATIVE BANKING RUNBOOK",
+    title: "Workflows:",
+    emphasis: "a repeatable response",
+    lead: "Collect the evidence, route the incident and notify the owner—with the bank's approval process intact.",
+    visual: 41,
+    takeaway:
+      "Automate preparation and coordination; authorize operational changes through the agreed process.",
+    detail:
+      "A configured incident integration carries context forward. Any response and recovery checks stay explicit.",
+    qualification:
+      "Illustrative authored runbook. Ticketing, notifications and approval use configured integrations or the bank's existing process.",
+    requirements:
+      "The diagram is not a native approval screen or a prebuilt banking workflow. Automatic steps collect context and coordinate the incident. A customer-impacting response requires the bank's existing approval process or an explicitly configured approval integration, appropriate credentials and a separate authorized action. Recovery is checked; earlier pending transfers need separate reconciliation. No transaction handling, system change or notification is executed here.",
+    sources: [S.workflowObservability, S.workflowHistory, S.workflowSetup],
+    notes: {
+      opening:
+        "A useful first banking runbook prepares the response rather than jumping straight to a system change.",
+      body: "An alert starts a context query, gathers the relevant evidence and identifies the service owner. A configured ticketing integration creates or updates the incident, and a notification reaches the responsible team. If a system response is proposed, the bank's approval process comes before execution. The result then needs a recovery check. Workflows makes the repeatable preparation and coordination explicit and inspectable; it does not decide the bank's response authority. Start with that bounded runbook and prove its usefulness before extending the automation.",
+      transition:
+        "This loop also needs to fit the bank's infrastructure and operating controls.",
+      seconds: 90,
+      prompt:
+        "Which steps can run automatically, and which require an authorized person?",
+    },
+    steps: [
+      "Collect the evidence",
+      "Coordinate the incident",
+      "Bank approval before response",
+      "Verify and record the outcome",
+    ],
+    illustrative: true,
+  },
+  {
+    id: "operating-model-choice",
+    chapter: "Operate on your terms",
+    eyebrow: "DIFFERENTIATOR · DEPLOYMENT AND DATA-LIFECYCLE CHOICE",
+    title: "Your infrastructure.",
+    emphasis: "Your operating model.",
+    lead: "Run self-managed, keep useful history searchable, and choose access and retention deliberately.",
+    visual: 42,
+    takeaway:
+      "Balance investigation depth, operating effort and retention cost within the bank's requirements.",
+    detail:
+      "Storage tiers and lifecycle policies help match evidence age to its access needs.",
+    qualification:
+      "Self-managed deployment is supported. Tiering, snapshots, licenses and approved data flows need design and validation.",
+    requirements:
+      "Searchable history is governed by configured retention, storage tier, snapshot repository and subscription. It is not a promise to store everything indefinitely or achieve universal savings. Plan package, upgrade and support dependencies. AI-assisted features need an explicitly approved model path; on-premises storage does not establish local inference. No Saudi-hosting or compliance assurance is implied.",
+    sources: [S.airGapped, S.retention, S.subscriptions],
+    notes: {
+      opening:
+        "The bank should be able to choose an operating model that fits its requirements.",
+      body: "Elastic can run on the bank's infrastructure. Retention and data tiers let the team decide which evidence needs fast access and which older evidence can use a different storage approach. That matters when an investigation needs to look beyond the immediate alert window. The tradeoff includes storage, search performance, recovery, licensing and operational effort. Self-managed does not mean dependency-free: package access, upgrades, support and any optional model connection need a planned path. The discussion is about control and design choices, not a blanket promise of compliance or lower cost.",
+      transition:
+        "A regional customer provides a concrete example of the shared-evidence approach on premises.",
+      seconds: 60,
+      prompt:
+        "What history must stay searchable, and what operating boundaries are fixed?",
+    },
+    steps: [
+      "Choose the deployment",
+      "Control access",
+      "Design useful history",
+      "Review every data flow",
+    ],
+    illustrative: false,
+  },
+  {
+    id: "customer-emirates-nbd",
+    chapter: "Customer evidence",
+    eyebrow: "EMIRATES NBD · REGIONAL, ON-PREMISES CUSTOMER STORY",
     title: "Emirates NBD:",
     emphasis: "shared investigation",
-    lead: "Centralized logs and APM support a reported shift from days to minutes to locate problems.",
-    visual: 20,
+    lead: "Centralized logs and APM support a reported move from days to minutes to locate problems.",
+    visual: 43,
     takeaway:
-      "Shared evidence can help teams locate a customer-facing problem together.",
+      "Shared evidence helps teams investigate the customer-facing problem together.",
     detail:
-      "The public story explicitly describes on-premises log storage and APM for application investigation.",
+      "The published story covers online banking, card transactions and ATM experience, with logs stored on premises.",
     qualification:
-      "Elastic-published account: days to minutes to locate problems. On-premises logs + APM; no Saudi-hosting or approval claim.",
+      "Elastic-published customer account. On-premises logs + APM; not a Saudi-hosting or regulatory-approval claim.",
     requirements:
-      "The public Emirates NBD story describes centralized logging with data stored on premises and APM across applications. It reports customer-facing issue resolution and locating problems moving from days to minutes; this is an attributed description, not a defined universal MTTR benchmark. The source does not establish Saudi hosting or regulator approval. Do not infer a guaranteed result for the prospect.",
+      "The source reports faster location and resolution of customer-facing issues, from days to minutes. This is an attributed customer account, not a measured guarantee or a forecast for this bank. It is evidence for the shared logs/APM approach, not proof that Streams or Workflows produced the reported result.",
     sources: [S.enbd],
+    customerReported: true,
+    notes: {
+      opening:
+        "Emirates NBD is the clearest regional example for this conversation.",
+      body: "The published account describes logs stored on premises and APM supporting a common investigation view. It connects that view to online banking issues, card transaction problems and ATM experience. The reported shift is from days to minutes to locate problems, with teams spending less time searching separate files. That makes it relevant to both the bank's operational priorities and its deployment preference. Keep the attribution exact: this is a customer story about centralized logs and APM, not a claim that Streams or Workflows delivered the historical result.",
+      transition:
+        "Two other customers illustrate different parts of the incident clock.",
+      seconds: 60,
+      prompt:
+        "Which of these banking examples most resembles your operational priorities?",
+    },
     steps: [
-      "Separate logs",
-      "Centralized evidence",
-      "Logs plus APM",
-      "Days to minutes",
+      "Centralized logs",
+      "On-premises evidence",
+      "Application context",
+      "Reported days to minutes",
     ],
     illustrative: false,
-    notes: {
-      opening:
-        "Emirates NBD describes a shared investigation view built on centralized logs and APM.",
-      body: "The public customer story explicitly says log data is stored on premises and describes APM supporting application investigation. Its reported improvement is from days to minutes to locate customer-facing problems, alongside faster issue resolution. Keep that wording tied to the account rather than treating it as a universal MTTR benchmark. The relevance here is a common view across teams investigating banking experiences such as online services and cards. This is a regional reference, but the source does not establish Saudi hosting or regulator approval, and it does not promise the same result for another bank.",
-      transition:
-        "These examples suggest several outcomes to measure separately.",
-      seconds: 75,
-      prompt:
-        "Where would a shared investigation view remove the most delay for your teams?",
-    },
   },
   {
-    id: "one-validation",
-    chapter: "One useful validation",
-    eyebrow: "Make the next step concrete",
-    title: "One useful",
-    emphasis: "validation",
-    lead: "Choose one journey, permitted evidence, a baseline or unknown, owners and a decision.",
-    visual: 22,
-    takeaway: "Finish with enough evidence to decide what should happen next.",
+    id: "customer-oney-wepay",
+    chapter: "Customer evidence",
+    eyebrow: "ONEY BANK + WEPAY · TWO PRECISE CUSTOMER RESULTS",
+    title: "Two customers.",
+    emphasis: "Two different clocks.",
+    lead: "Oney shows earlier detection. WePay shows faster identification of customer impact.",
+    visual: 44,
+    takeaway:
+      "Measure detection and customer-impact identification separately from time to resolve.",
     detail:
-      "Measure detection, impact analysis, investigation and restoration separately, with an agreed clock for each.",
+      "Oney: API incidents, up to 20 minutes to 1 minute. WePay: 90% less time to identify customer impact during incidents.",
     qualification:
-      "Proposed validation only. Scope, data permissions, owners, measures and success criteria must be agreed.",
+      "Customer-reported examples, not forecasts. WePay: Google Cloud; its APM adoption was a future plan.",
     requirements:
-      "Select one journey with a business owner and service owner. Confirm permitted evidence, the baseline or an explicit unknown, the outcome, window and decision. For each chosen measure, agree its start and end event, owner and source: detecting a symptom, identifying customer impact, verifying a cause and checking restoration are different clocks. Do not substitute customer-story percentages for a local baseline or blend them into MTTR. Record evidence gaps and process changes. Confirm deployment and entitlement requirements, use synthetic or approved data, and follow the bank’s change controls.",
-    sources: [S.observability, S.slo, S.subscriptions],
-    steps: [
-      "Choose the journey",
-      "Agree the evidence",
-      "Assign the owners",
-      "Define the decision",
-    ],
-    illustrative: true,
+      "Oney's measure is API-incident detection, not resolution or MTTR; its hosting is not established as on premises. WePay's 90% measure is impact identification, not downtime, incident count or MTTR, and must not be attributed to APM. Neither story establishes that Streams or Workflows caused the result. The two measures are not combined into one improvement claim.",
+    sources: [S.oney, S.wepay],
+    customerReported: true,
     notes: {
       opening:
-        "A useful next step is a small validation with a decision attached.",
-      body: "Choose one journey and its business and service owners. Agree permitted evidence, the baseline or what remains unknown, and the completion signal. Define the clocks separately: detection identifies the incident; impact analysis establishes who or what is affected; investigation verifies the cause; restoration checks the agreed outcome. Each needs start and end events, an owner and an evidence source. Another customer’s percentage cannot replace a local baseline. Set a review window and a decision, such as whether evidence is sufficient or instrumentation needs to change. The validation should answer that operational question within the bank’s approved environment.",
-      transition: "Return to the journey that matters most to the customer.",
-      seconds: 90,
+        "These two results are useful because they measure different operational questions.",
+      body: "Oney reports API incident detection moving from up to twenty minutes to one minute after consolidating monitoring. WePay reports ninety percent less time to identify customer impact during incidents using consolidated logging and telemetry. Its story is in Google Cloud, and APM is described as a future plan. Those details matter: neither number is an MTTR claim or a forecast for your bank. Together they show why we should agree which clock a validation will measure instead of presenting a broad, undefined promise to make incidents faster.",
+      transition:
+        "Close by joining the differentiators into one practical validation.",
+      seconds: 60,
       prompt:
-        "Which journey, evidence owner and decision could anchor the first validation?",
+        "Would earlier detection, faster impact identification or faster investigation matter most first?",
     },
+    steps: [
+      "Oney: detection",
+      "Up to 20 minutes → 1",
+      "WePay: impact identification",
+      "90% less time, distinct measure",
+    ],
+    illustrative: false,
   },
   {
-    id: "next-conversation",
-    chapter: "One useful validation",
-    eyebrow: "The next conversation",
-    title: "Which journey",
-    emphasis: "should we validate?",
-    lead: "Connect customer experience, shared evidence and an owner’s next decision.",
-    visual: 23,
-    takeaway: "Choose one service worth understanding better.",
+    id: "why-elastic-validate-the-loop",
+    chapter: "Why Elastic",
+    eyebrow: "WHY ELASTIC · VALIDATE THE CONNECTED LOOP",
+    title: "Why Elastic?",
+    emphasis: "Connect the whole loop.",
+    lead: "Streams makes logs useful. Connected investigation explains the issue. Workflows coordinates action.",
+    visual: 45,
+    takeaway:
+      "Prove that loop on one banking service, with agreed evidence, owners and success criteria.",
     detail:
-      "Start with a real question and agree the smallest permitted evidence set that could answer it.",
+      "Choose the log sources, an RCA question and one bounded runbook; measure the result against a known baseline or record it as unknown.",
     qualification:
-      "Discussion proposal. The incident was fictional; any validation uses agreed scope, permissions and success measures.",
+      "Proposed validation. Scope, access, version, subscription, baseline and response authority must be agreed.",
     requirements:
-      "No bank architecture, incident, target, regulatory obligation or financial return has been assumed. The next conversation should establish the actual journey, operating boundary, evidence permissions, owners and decision. Public customer outcomes remain attributed examples. Product availability is checked against the intended release, deployment and entitlement.",
-    sources: [S.observability, S.subscriptions],
-    steps: [
-      "Customer outcome",
-      "Useful evidence",
-      "Responsible owner",
-      "Next decision",
-    ],
-    illustrative: true,
+      "The next step is an evaluation proposal, not a promise of a specific result or a request to connect production systems through this website. Choose permitted samples, responsible owners, an appropriate test environment and an explicit decision criterion. Keep the original sources and the bank's operating requirements visible throughout.",
+    sources: [S.streams, S.apmOverview, S.workflows],
     notes: {
       opening:
-        "Which customer journey would be most useful to understand together?",
-      body: "We began with a customer waiting for a transfer and followed a complete investigation: scope the impact, connect evidence, test a candidate explanation, approve a response and check the outcome. The value of the next conversation is to select a real question that matters to your team. We can then agree the smallest permitted evidence set, the relevant owners and a measure that supports a decision. No architecture or improvement target has been assumed. A focused validation gives us a practical way to learn whether this approach helps in your environment.",
+        "The Elastic difference is the connected loop from data preparation to investigation to action.",
+      body: "Choose one important service. Use Streams to make selected logs useful, connect them to the evidence needed for one RCA question, then author a bounded Workflow that collects context and coordinates the response. Keep the bank's deployment and approval requirements explicit. Agree the baseline, or mark it unknown, and decide what evidence will justify the next step. That gives the team a practical way to evaluate the differentiators we have shown rather than leave with another feature checklist.",
       transition:
-        "Open the discussion around the selected journey and its owners.",
+        "Agree the service, the owners and the evidence for the next conversation.",
       seconds: 30,
-      prompt: "Which service is worth validating first?",
+      prompt: "Which service would be the strongest place to prove this loop?",
     },
+    steps: [
+      "Streams",
+      "Connected RCA",
+      "Workflows",
+      "One agreed banking validation",
+    ],
+    illustrative: false,
   },
 ];

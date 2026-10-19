@@ -1,11 +1,10 @@
 import type { Scene, VisualOptions } from "./types";
 import { esc } from "./visual-primitives";
-import { renderBusiness } from "./visuals-business";
-import { renderInvestigation } from "./visuals-investigation";
+import { renderFoundation } from "./visuals-foundation";
+import { renderAction } from "./visuals-action";
 
 export function renderVisual(scene: Scene, o: VisualOptions) {
-  let body =
-    renderBusiness(scene.visual, o) || renderInvestigation(scene.visual, o);
+  let body = renderFoundation(scene.visual, o) || renderAction(scene.visual, o);
   if (o.settled)
     body = body
       .replace(/<circle\b[^>]*class="request-dot"[^>]*>[\s\S]*?<\/circle>/g, "")

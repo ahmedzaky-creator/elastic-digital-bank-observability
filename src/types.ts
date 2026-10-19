@@ -27,6 +27,7 @@ export interface Scene {
   notes: Notes;
   steps: [string, string, string, string];
   illustrative: boolean;
+  customerReported?: boolean;
 }
 export interface VisualOptions {
   step: number;

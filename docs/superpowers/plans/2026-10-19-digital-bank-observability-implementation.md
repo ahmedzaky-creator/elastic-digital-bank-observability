@@ -1,4 +1,6 @@
-# Reliable Digital Banking — implementation plan
+# Reliable Digital Banking — first-release implementation plan
+
+Historical record. The active revision follows [the differentiation implementation plan](2026-10-19-digital-bank-differentiation-implementation.md).
 
 The user approved the independently reviewed design and separate public GitHub Pages publication on 19 October 2026. The installed writing-plans companion was searched in both skill roots and is absent; this explicit committed implementation plan provides the handoff before coding.
 
