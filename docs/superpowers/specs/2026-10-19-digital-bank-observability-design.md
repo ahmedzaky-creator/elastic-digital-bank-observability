@@ -1,6 +1,6 @@
 # Reliable Digital Banking — presentation design
 
-Status: independently reviewed; awaiting the user's written approval before implementation. Prepared 19 October 2026 for the customer meeting on 20 October 2026, Asia/Riyadh.
+Status: independently reviewed and approved by the user for implementation and separate public GitHub Pages delivery on 19 October 2026. Prepared 19 October 2026 for the customer meeting on 20 October 2026, Asia/Riyadh.
 
 ## Brief and decisions
 
@@ -120,4 +120,4 @@ Deliver a hosted browser link, a standalone offline HTML with bundled fonts/grap
 6. Audit intended public files/history for source-deck material, private paths, identifiers and unsupported claims. Build with locked dependencies; run appropriate browser checks in deployment automation.
 7. Verify the published site, direct links and downloadable files. Keep the source and previous successful deployment recoverable through Git history and documented rollback.
 
-Implementation remains pending approval of this written design. No presentation code or public repository has been created for this request.
+The user approved this written design and publication scope on 19 October 2026. Implementation follows the committed plan.
