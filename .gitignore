@@ -1,0 +1,10 @@
+research/
+work/
+artifacts/
+TASKS.md
+node_modules/
+dist/
+test-results/
+playwright-report/
+*.pptx
+.DS_Store
