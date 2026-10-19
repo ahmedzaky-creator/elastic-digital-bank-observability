@@ -31,7 +31,7 @@ Right/Left Arrow, Space and Page Down/Up change slides immediately. Animations p
 | ?          | Help and downloads           |
 | Home / End | First / last slide           |
 
-The timer has its own pause and reset controls. Hide notes before sharing the browser window. Touch users can swipe between slides; on small screens, “Read scene text” offers a larger text view.
+Click the timer to pause or resume it. Hide notes before sharing the browser window. Touch users can swipe between slides; on small screens, “Read scene text” offers a larger text view.
 
 ## Evidence and boundaries
 

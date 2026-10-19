@@ -12,4 +12,6 @@ Verified 19 October 2026 against the user-directed 16-slide scope.
 
 Two initial browser test failures were corrected as test assumptions: speaker notes intentionally persist across hash navigation, and native select keystroke behavior varies by operating system. The final tests check persisted notes, uncancelled native key events and real selection changes separately. The final complete suite passed after these corrections.
 
-Public deployment is verified separately after GitHub Actions completes. Previous source and companions remain recoverable from Git history; Pages artifacts are retained for 30 days.
+The [first GitHub Actions run](https://github.com/ahmedzaky-creator/elastic-digital-bank-observability/actions/runs/39268147735) passed both verification and deployment. The published site was then checked across all 16 direct routes, notes, immediate navigation, overview and mobile layout: no page errors or failed asset responses. All 16 thumbnails returned successfully. The four public downloads matched the verified local files byte for byte by SHA-256. The finished presentation was opened in the browser.
+
+Previous source and companions remain recoverable from Git history; Pages artifacts are retained for 30 days.

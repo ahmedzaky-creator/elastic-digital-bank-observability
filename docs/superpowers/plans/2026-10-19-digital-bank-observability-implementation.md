@@ -45,7 +45,7 @@ No completion claim until fresh production build/tests, scene/export visual revi
 - [x] Player and presenter tools
 - [x] Offline/PDF/notes/evidence exports
 - [x] Browser and visual validation; independent final review
-- [ ] Public repository and published-site verification
+- [x] Public repository and published-site verification
 
 ## User-directed 16-slide amendment
 
